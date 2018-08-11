@@ -310,6 +310,7 @@ GameObject:
   - component: {fileID: 900501043}
   - component: {fileID: 900501042}
   - component: {fileID: 900501041}
+  - component: {fileID: 900501046}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -331,7 +332,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 6
+  m_Radius: 5.9999995
 --- !u!50 &900501042
 Rigidbody2D:
   serializedVersion: 4
@@ -347,7 +348,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3d91167a749f8df4da469e3959259c34, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -368,12 +369,11 @@ MonoBehaviour:
   Vertical: Vertical
   JumpKey: 32
   offset: {x: 5, y: 2}
-  speed: 13
-  airSpeed: 8
-  jumpForce: 8
-  smallJump: 4
+  speed: 26
+  airSpeed: 16
+  jumpForce: 16
+  smallJump: 8
   gravity: -25
-  velocity: 0
 --- !u!212 &900501044
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -433,6 +433,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!249 &900501046
+AreaEffector2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 900501040}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGlobalAngle: 0
+  m_ForceAngle: 0
+  m_ForceMagnitude: 10
+  m_ForceVariation: 0
+  m_ForceTarget: 0
+  m_Drag: 0
+  m_AngularDrag: 0
 --- !u!1001 &969912904
 Prefab:
   m_ObjectHideFlags: 0
