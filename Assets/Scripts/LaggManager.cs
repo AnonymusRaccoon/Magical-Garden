@@ -9,19 +9,36 @@ public class LaggManager : MonoBehaviour {
     private int FreezeJitter = 1;
     private float MinLaggJitter = 0.07f;
     private float MaxLaggJitter = 0.15f;
-
-	// Use this for initialization
-	void Start () {
-        QualitySettings.vSyncCount = 0;
+    public float Ram;
+    private float RamMax = 10;
+    void OnGUI()
+    {
+        GUI.Box(new Rect(10, 10, 30, 90), "Ram:"+Ram);
     }
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    void Start () {
+        QualitySettings.vSyncCount = 0;
+        //RamMax = SystemInfo.systemMemorySize;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.K))
         {
             BugFreeze(20);
+
         }
-	}
+       
+
+    }
+    public void BugTrigger()
+    {
+        
+    }
+
+    
+
     public async void VitesseRalentit(float VitesseDeJeu)
     {
         float NewLaggJitter = Random.Range(MinLaggJitter, MaxLaggJitter);
@@ -48,4 +65,6 @@ public class LaggManager : MonoBehaviour {
     {
         Application.targetFrameRate = 60;
     }
+
+    
 }
