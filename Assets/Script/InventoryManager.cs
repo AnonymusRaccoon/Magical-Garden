@@ -6,16 +6,17 @@ public class InventoryManager : MonoBehaviour
 {
     public Camera cam;
     public Tilemap treeMap;
-    public TileBase testTile;
+    public Tilemap selectorMap;
+    public TileBase[] selector;
 
     [Space]
     public GameObject[] slots;
     private TreeItem[] items = new TreeItem[12];
     public Plot[] plots = new Plot[25];
-    private Dictionary<int, TreeItem> trees;
 
     private int draggedPosition = -1;
     private Vector3 defaultPos;
+    private Vector2Int selectorPos;
 
 
     private void Update()
@@ -25,10 +26,12 @@ public class InventoryManager : MonoBehaviour
             if (draggedPosition != -1)
             {
                 slots[draggedPosition].transform.GetChild(1).position = Input.mousePosition;
+                DisplaySelector(cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, selectorMap.transform.parent.position.z)));
             }
         }
         else if(draggedPosition != -1)
         {
+            HideSelector(new Vector2Int(selectorPos.x - 2, selectorPos.y - 3));
             if (CanPlantAt(cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, treeMap.transform.parent.position.z))))
             {
                 PlaceTree(items[draggedPosition]);
@@ -38,7 +41,7 @@ public class InventoryManager : MonoBehaviour
             }
             else
             {
-                slots[draggedPosition].transform.GetChild(0).position = defaultPos;
+                slots[draggedPosition].transform.GetChild(1).position = defaultPos;
             }
             draggedPosition = -1;
         }
@@ -47,10 +50,9 @@ public class InventoryManager : MonoBehaviour
     private bool CanPlantAt(Vector3 position)
     {
         Vector3Int pos = treeMap.WorldToCell(position);
-
         if (-8 <= pos.x && pos.x <= 11 && -15 <= pos.y && pos.y <= 4)
         {
-            if (plots[GetPosIndex(pos)].isUsed)
+            if (GetPlotIndex(pos) == -1 || plots[GetPlotIndex(pos)].isUsed)
                 return false;
             else
                 return true;
@@ -86,78 +88,135 @@ public class InventoryManager : MonoBehaviour
     //    }
     //}
 
-    private int GetPosIndex(Vector3Int pos)
+    private void DisplaySelector(Vector3 position)
     {
-        pos.x += 8;
-        pos.y += 15;
+        Vector3Int pos = selectorMap.WorldToCell(position);
+        Vector2Int plotPos = GetPlotPosition(pos);
 
-        int index = -1;
-        switch (pos.x)
+        if (selectorPos != null)
+        {
+            if (selectorPos == plotPos)
+                return;
+
+            HideSelector(new Vector2Int(selectorPos.x - 2, selectorPos.y - 3));
+        }
+
+        if (plotPos.x == -1 || plotPos.y == -1)
+            return;
+
+        selectorPos = plotPos;
+        plotPos.x -= 2;
+        plotPos.y -= 3;
+        selectorMap.SetTile(new Vector3Int(plotPos.x * 4, plotPos.y * 4, 0), selector[0]);
+        selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + 1, plotPos.y * 4, 0), selector[1]);
+        selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + 2, plotPos.y * 4, 0), selector[1]);
+        selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + 3, plotPos.y * 4, 0), selector[2]);
+        selectorMap.SetTile(new Vector3Int(plotPos.x * 4, plotPos.y * 4 - 1, 0), selector[3]);
+        selectorMap.SetTile(new Vector3Int(plotPos.x * 4, plotPos.y * 4 - 2, 0), selector[3]);
+        selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + 3, plotPos.y * 4 - 1, 0), selector[4]);
+        selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + 3, plotPos.y * 4 - 2, 0), selector[4]);
+        selectorMap.SetTile(new Vector3Int(plotPos.x * 4, plotPos.y * 4 - 3, 0), selector[5]);
+        selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + 1, plotPos.y * 4 - 3, 0), selector[6]);
+        selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + 2, plotPos.y * 4 - 3, 0), selector[6]);
+        selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + 3, plotPos.y * 4 - 3, 0), selector[7]);
+    }
+
+    private void HideSelector(Vector2Int pos)
+    {
+        selectorMap.SetTile(new Vector3Int(pos.x * 4, pos.y * 4, 0), null);
+        selectorMap.SetTile(new Vector3Int(pos.x * 4 + 1, pos.y * 4, 0), null);
+        selectorMap.SetTile(new Vector3Int(pos.x * 4 + 2, pos.y * 4, 0), null);
+        selectorMap.SetTile(new Vector3Int(pos.x * 4 + 3, pos.y * 4, 0), null);
+        selectorMap.SetTile(new Vector3Int(pos.x * 4, pos.y * 4 - 1, 0), null);
+        selectorMap.SetTile(new Vector3Int(pos.x * 4, pos.y * 4 - 2, 0), null);
+        selectorMap.SetTile(new Vector3Int(pos.x * 4 + 3, pos.y * 4 - 1, 0), null);
+        selectorMap.SetTile(new Vector3Int(pos.x * 4 + 3, pos.y * 4 - 2, 0), null);
+        selectorMap.SetTile(new Vector3Int(pos.x * 4, pos.y * 4 - 3, 0), null);
+        selectorMap.SetTile(new Vector3Int(pos.x * 4 + 1, pos.y * 4 - 3, 0), null);
+        selectorMap.SetTile(new Vector3Int(pos.x * 4 + 2, pos.y * 4 - 3, 0), null);
+        selectorMap.SetTile(new Vector3Int(pos.x * 4 + 3, pos.y * 4 - 3, 0), null);
+    }
+
+    private int GetPlotIndex(Vector3Int pos)
+    {
+        Vector2Int plotPos = GetPlotPosition(pos);
+        if (plotPos.x == -1 || plotPos.y == -1)
+            return -1;
+        return plotPos.x + plotPos.y * 5;
+    }
+
+    private Vector2Int GetPlotPosition(Vector3Int position)
+    {
+        position.x += 8;
+        position.y += 15;
+
+        Vector2Int pos = new Vector2Int(-1, -1);
+        switch (position.x)
         {
             case 0:
             case 1:
             case 2:
             case 3:
-                index = 0;
+                pos.x = 0;
                 break;
             case 4:
             case 5:
             case 6:
             case 7:
-                index = 1;
+                pos.x = 1;
                 break;
             case 8:
             case 9:
             case 10:
             case 11:
-                index = 2;
+                pos.x = 2;
                 break;
             case 12:
             case 13:
             case 14:
             case 15:
-                index = 3;
+                pos.x = 3;
                 break;
             case 16:
             case 17:
             case 18:
             case 19:
-                index = 4;
+                pos.x = 4;
                 break;
         }
-        switch (pos.y)
+        switch (position.y)
         {
             case 0:
             case 1:
             case 2:
             case 3:
-                index += 0;
+                pos.y = 0;
                 break;
             case 4:
             case 5:
             case 6:
             case 7:
-                index += 5;
+                pos.y = 1;
                 break;
             case 8:
             case 9:
             case 10:
             case 11:
-                index += 10;
+                pos.y = 2;
                 break;
             case 12:
             case 13:
             case 14:
             case 15:
-                index += 15;
+                pos.y = 3;
                 break;
             case 16:
             case 17:
             case 18:
             case 19:
-                index = 20;
+                pos.y = 4;
                 break;
         }
-        return index;
+        return pos;
     }
 }
