@@ -51,10 +51,15 @@ public class InventoryManager : MonoBehaviour
         Vector3Int pos = treeMap.WorldToCell(position);
         if (-8 <= pos.x && pos.x <= 11 && -15 <= pos.y && pos.y <= 4)
         {
-            if (GetPlotIndex(pos) == -1 || plots[GetPlotIndex(pos)].treePlaced == TreeType.Nothing)
+            print(GetPlotIndex(pos));
+            if (GetPlotIndex(pos) == -1 || plots[GetPlotIndex(pos)].treePlaced != TreeType.Nothing)
+            {
                 return false;
+            }
             else
+            {
                 return true;
+            }
         }
         else
             return false;
@@ -62,18 +67,22 @@ public class InventoryManager : MonoBehaviour
 
     private void PlaceTree(TreeItem item, Vector3 position)
     {
+        print("Placing tree");
         Vector3Int cellPos = treeMap.WorldToCell(position);
         int index = GetPlotIndex(cellPos);
         Vector2Int plotPos = GetPlotPosition(cellPos);
         plots[index].treePlaced = item.type;
 
-        for (int x = 0; x < 4; x++)
+        int i = 0;
+        for (int y = 0; y > -4; y--)
         {
-            for (int y = 0; y < 4; y++)
+            for (int x = 0; x < 4; x++)
             {
-                treeMap.SetTile(new Vector3Int(plotPos.x * 4 + x, plotPos.y * 4 + y, 0), item.tiles[x * 4 + y]);
+                treeMap.SetTile(new Vector3Int(plotPos.x * 4 + x, plotPos.y * 4 + y, 0), item.tiles[i]);
+                i++;
             }
         }
+        
 
         //switch (item.type)
         //{
@@ -152,6 +161,9 @@ public class InventoryManager : MonoBehaviour
         Vector2Int plotPos = GetPlotPosition(pos);
         if (plotPos.x == 999 || plotPos.y == 999)
             return -1;
+
+        plotPos.x += 2;
+        plotPos.y += 3;
         return plotPos.x + plotPos.y * 5;
     }
 
