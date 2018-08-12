@@ -52,7 +52,7 @@ public class InventoryManager : MonoBehaviour
         if (-8 <= pos.x && pos.x <= 11 && -15 <= pos.y && pos.y <= 4)
         {
             print(GetPlotIndex(pos));
-            if (GetPlotIndex(pos) == -1 || plots[GetPlotIndex(pos)].treePlaced != TreeType.Nothing)
+            if (GetPlotIndex(pos) == -1 && plots[GetPlotIndex(pos)].treePlaced != TreeType.Nothing)
             {
                 return false;
             }
@@ -67,7 +67,6 @@ public class InventoryManager : MonoBehaviour
 
     private void PlaceTree(TreeItem item, Vector3 position)
     {
-        print("Placing tree");
         Vector3Int cellPos = treeMap.WorldToCell(position);
         int index = GetPlotIndex(cellPos);
         Vector2Int plotPos = GetPlotPosition(cellPos);
