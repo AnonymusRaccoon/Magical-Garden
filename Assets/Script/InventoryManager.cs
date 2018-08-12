@@ -160,7 +160,7 @@ public class InventoryManager : MonoBehaviour
         position.x += 8;
         position.y += 15;
 
-        Vector2Int pos = new Vector2Int(-1, -1);
+        Vector2Int pos = new Vector2Int(999, 999);
         switch (position.x)
         {
             case 0:

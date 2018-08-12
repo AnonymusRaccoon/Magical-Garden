@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -265,6 +265,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1472403156812664, guid: 89e9215b05511f648b3306ce05aae35f,
     type: 2}
   m_PrefabInternal: {fileID: 1496227943}
+--- !u!1 &292199874 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1472403156812664, guid: 89e9215b05511f648b3306ce05aae35f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1832592737}
 --- !u!1 &298978967
 GameObject:
   m_ObjectHideFlags: 0
@@ -5565,6 +5570,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1472403156812664, guid: 89e9215b05511f648b3306ce05aae35f,
     type: 2}
   m_PrefabInternal: {fileID: 1281644788}
+--- !u!1 &798873072 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1472403156812664, guid: 89e9215b05511f648b3306ce05aae35f,
+    type: 2}
+  m_PrefabInternal: {fileID: 542649035}
 --- !u!1 &955100579 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1472403156812664, guid: 89e9215b05511f648b3306ce05aae35f,
@@ -6388,8 +6398,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1638699787}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.2941175, y: -4.705882, z: -25}
-  m_LocalScale: {x: 0.58823526, y: 0.58823526, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 997557028}
   m_RootOrder: 0
@@ -8184,6 +8194,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1719297731 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1472403156812664, guid: 89e9215b05511f648b3306ce05aae35f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1136437093}
 --- !u!1 &1724986182
 GameObject:
   m_ObjectHideFlags: 0
@@ -8213,8 +8228,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 534669904}
   treeMap: {fileID: 546932564}
-  selectorMap: {fileID: 0}
-  selector: []
+  selectorMap: {fileID: 1638699790}
+  selector:
+  - {fileID: 11400000, guid: 8169ed9965d205d4ea5821521c5ea3f2, type: 2}
+  - {fileID: 11400000, guid: a726686115c6e464ab505a8c838976e2, type: 2}
+  - {fileID: 11400000, guid: 51a80e85753557f4ea1d415df2a93e4a, type: 2}
+  - {fileID: 11400000, guid: 3a322f8861c25c840b775e9c149e8d18, type: 2}
+  - {fileID: 11400000, guid: 893120d224931d540bb7301d3aff620f, type: 2}
+  - {fileID: 11400000, guid: ad2d05a258684b340a25d9221a44e350, type: 2}
+  - {fileID: 11400000, guid: 8078b45f9a3232446956ed5fdd47ddb8, type: 2}
+  - {fileID: 11400000, guid: 372baa95be60a3c479f80c3e34781e9d, type: 2}
   slots:
   - {fileID: 793124532}
   - {fileID: 1181635282}
@@ -8228,7 +8251,25 @@ MonoBehaviour:
   - {fileID: 242720742}
   - {fileID: 1774186325}
   - {fileID: 287652558}
+  - {fileID: 1719297731}
+  - {fileID: 292199874}
+  - {fileID: 798873072}
   items:
+  - type: 0
+    description: 
+    icon: {fileID: 0}
+    tiles: []
+    count: 0
+  - type: 0
+    description: 
+    icon: {fileID: 0}
+    tiles: []
+    count: 0
+  - type: 0
+    description: 
+    icon: {fileID: 0}
+    tiles: []
+    count: 0
   - type: 0
     description: 
     icon: {fileID: 0}
@@ -8292,53 +8333,53 @@ MonoBehaviour:
   plots:
   - type: 0
     treePlaced: 0
-  - type: 0
+  - type: 1
     treePlaced: 0
-  - type: 0
+  - type: 1
     treePlaced: 0
-  - type: 0
+  - type: 1
     treePlaced: 0
-  - type: 0
+  - type: 1
     treePlaced: 0
-  - type: 0
+  - type: 1
     treePlaced: 0
-  - type: 0
+  - type: 2
     treePlaced: 0
-  - type: 0
+  - type: 2
     treePlaced: 0
-  - type: 0
+  - type: 1
     treePlaced: 0
-  - type: 0
+  - type: 2
     treePlaced: 0
-  - type: 0
+  - type: 8
     treePlaced: 0
-  - type: 0
+  - type: 8
     treePlaced: 0
-  - type: 0
+  - type: 8
     treePlaced: 0
-  - type: 0
+  - type: 32
     treePlaced: 0
-  - type: 0
+  - type: 32
     treePlaced: 0
-  - type: 0
+  - type: 16
     treePlaced: 0
-  - type: 0
+  - type: 4
     treePlaced: 0
-  - type: 0
+  - type: 4
     treePlaced: 0
-  - type: 0
+  - type: 48
     treePlaced: 0
-  - type: 0
+  - type: 32
     treePlaced: 0
-  - type: 0
+  - type: 16
     treePlaced: 0
-  - type: 0
+  - type: 48
     treePlaced: 0
-  - type: 0
+  - type: 16
     treePlaced: 0
-  - type: 0
+  - type: 1
     treePlaced: 0
-  - type: 0
+  - type: 1
     treePlaced: 0
 --- !u!4 &1724986184
 Transform:
