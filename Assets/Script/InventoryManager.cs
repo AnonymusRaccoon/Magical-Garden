@@ -113,7 +113,7 @@ public class InventoryManager : MonoBehaviour
             HideSelector(selectorPos);
         }
 
-        if (plotPos.x == -1 || plotPos.y == -1)
+        if (plotPos.x == 999 || plotPos.y == 999)
             return;
 
         selectorPos = plotPos;
@@ -150,7 +150,7 @@ public class InventoryManager : MonoBehaviour
     private int GetPlotIndex(Vector3Int pos)
     {
         Vector2Int plotPos = GetPlotPosition(pos);
-        if (plotPos.x == -1 || plotPos.y == -1)
+        if (plotPos.x == 999 || plotPos.y == 999)
             return -1;
         return plotPos.x + plotPos.y * 5;
     }
@@ -227,8 +227,11 @@ public class InventoryManager : MonoBehaviour
                 pos.y = 4;
                 break;
         }
-        pos.x -= 2;
-        pos.y -= 3;
+        if(pos.x != 999 || pos.y != 999)
+        {
+            pos.x -= 2;
+            pos.y -= 3;
+        }
         return pos;
     }
 }
