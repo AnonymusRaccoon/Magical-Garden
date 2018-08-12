@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11477,12 +11477,44 @@ MonoBehaviour:
   - type: 1
     description: LE POKETEXTE OUIIIIIIIII
     icon: {fileID: 0}
-    tiles: []
+    tiles:
+    - {fileID: 11400000, guid: 8211ec7c8d6f50c4ca0a1f746e15b7a8, type: 2}
+    - {fileID: 11400000, guid: 9d866a74ea944d14f81bb4133b55bdc9, type: 2}
+    - {fileID: 11400000, guid: f327cde15cc3afe4bbc3078cca9f405f, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 391678ab645774948831671a31e7027a, type: 2}
+    - {fileID: 11400000, guid: 044f9c100a9756f4b863a5d7219d933f, type: 2}
+    - {fileID: 11400000, guid: 11465fddecc996943b4b34f67db1050f, type: 2}
+    - {fileID: 11400000, guid: 54bf6d2e1f71706488053c42c24988d6, type: 2}
+    - {fileID: 11400000, guid: df7cef07a09055346b9574d87438b86a, type: 2}
+    - {fileID: 11400000, guid: ec00ac8876424b245a08cfd92ea97e95, type: 2}
+    - {fileID: 11400000, guid: 77cb4ff04ae84f94187a3b32c8dea1b8, type: 2}
+    - {fileID: 11400000, guid: 1d44349cb7d2679438205d5ff59855b5, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: ca64649711c32e045acc87a7b826744b, type: 2}
+    - {fileID: 11400000, guid: 802eedf913287cc4596701ec2a9c034e, type: 2}
+    - {fileID: 0}
     count: 0
   - type: 0
     description: 
     icon: {fileID: 0}
-    tiles: []
+    tiles:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 93eb7068b8cafe040820f9cdd3937728, type: 2}
+    - {fileID: 11400000, guid: a26976579f1cd1447bf0584497673534, type: 2}
+    - {fileID: 11400000, guid: 3b47b77b98a14c64cac8cb9827fe0279, type: 2}
+    - {fileID: 11400000, guid: 950a8b04a130129448100206fc750a29, type: 2}
+    - {fileID: 11400000, guid: abaa622ea21b3b046b39150448ddf157, type: 2}
+    - {fileID: 11400000, guid: 15fb5d8c5a4eaf34bb351b6b95cef415, type: 2}
+    - {fileID: 11400000, guid: 8f977961ff6e2a545885520b5e30084e, type: 2}
+    - {fileID: 11400000, guid: c9405a024ab6a8a418eab8e61a1af1d4, type: 2}
+    - {fileID: 11400000, guid: bc320493c8b05394b8099e1c385c4756, type: 2}
+    - {fileID: 11400000, guid: 1a63cd8db511dd441b953afa5f46855d, type: 2}
+    - {fileID: 11400000, guid: 5f3a71146f30ca34eaa3d33cc5c52376, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: c2990fc2c1e85b84b8bb7b8ce8e0a1c6, type: 2}
+    - {fileID: 11400000, guid: af72725ced11a594f8d5bc859c9a25f0, type: 2}
+    - {fileID: 11400000, guid: b37f3e5d6ce1f044dbdc9fa665c7041a, type: 2}
     count: 0
   - type: 0
     description: 
