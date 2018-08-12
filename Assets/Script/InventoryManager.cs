@@ -11,7 +11,7 @@ public class InventoryManager : MonoBehaviour
 
     [Space]
     public GameObject[] slots;
-    private TreeItem[] items = new TreeItem[12];
+    public TreeItem[] items = new TreeItem[12];
     public Plot[] plots = new Plot[25];
 
     private int draggedPosition = -1;
@@ -31,13 +31,12 @@ public class InventoryManager : MonoBehaviour
         }
         else if(draggedPosition != -1)
         {
-            HideSelector(new Vector2Int(selectorPos.x - 2, selectorPos.y - 3));
+            HideSelector(selectorPos);
             if (CanPlantAt(cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, treeMap.transform.parent.position.z))))
             {
-                PlaceTree(items[draggedPosition]);
-                items[draggedPosition] = null;
+                PlaceTree(items[draggedPosition], cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, treeMap.transform.parent.position.z)));
+                items[draggedPosition].count -= 1;
                 slots[draggedPosition].transform.GetChild(1).position = defaultPos;
-                slots[draggedPosition].transform.GetChild(1).gameObject.SetActive(false);
             }
             else
             {
@@ -52,7 +51,7 @@ public class InventoryManager : MonoBehaviour
         Vector3Int pos = treeMap.WorldToCell(position);
         if (-8 <= pos.x && pos.x <= 11 && -15 <= pos.y && pos.y <= 4)
         {
-            if (GetPlotIndex(pos) == -1 || plots[GetPlotIndex(pos)].isUsed)
+            if (GetPlotIndex(pos) == -1 || plots[GetPlotIndex(pos)].treePlaced == TreeType.Nothing)
                 return false;
             else
                 return true;
@@ -61,8 +60,21 @@ public class InventoryManager : MonoBehaviour
             return false;
     }
 
-    private void PlaceTree(TreeItem item)
+    private void PlaceTree(TreeItem item, Vector3 position)
     {
+        Vector3Int cellPos = treeMap.WorldToCell(position);
+        int index = GetPlotIndex(cellPos);
+        Vector2Int plotPos = GetPlotPosition(cellPos);
+        plots[index].treePlaced = item.type;
+
+        for (int x = 0; x < 4; x++)
+        {
+            for (int y = 0; y < 4; y++)
+            {
+                treeMap.SetTile(new Vector3Int(plotPos.x * 4 + x, plotPos.y * 4 + y, 0), item.tiles[x * 4 + y]);
+            }
+        }
+
         //switch (item.type)
         //{
         //    case TreeType.AppleTree:
@@ -98,15 +110,13 @@ public class InventoryManager : MonoBehaviour
             if (selectorPos == plotPos)
                 return;
 
-            HideSelector(new Vector2Int(selectorPos.x - 2, selectorPos.y - 3));
+            HideSelector(selectorPos);
         }
 
         if (plotPos.x == -1 || plotPos.y == -1)
             return;
 
         selectorPos = plotPos;
-        plotPos.x -= 2;
-        plotPos.y -= 3;
         selectorMap.SetTile(new Vector3Int(plotPos.x * 4, plotPos.y * 4, 0), selector[0]);
         selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + 1, plotPos.y * 4, 0), selector[1]);
         selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + 2, plotPos.y * 4, 0), selector[1]);
@@ -217,6 +227,8 @@ public class InventoryManager : MonoBehaviour
                 pos.y = 4;
                 break;
         }
+        pos.x -= 2;
+        pos.y -= 3;
         return pos;
     }
 }
