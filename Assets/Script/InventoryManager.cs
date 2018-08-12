@@ -51,14 +51,13 @@ public class InventoryManager : MonoBehaviour
         Vector3Int pos = treeMap.WorldToCell(position);
         if (-8 <= pos.x && pos.x <= 11 && -15 <= pos.y && pos.y <= 4)
         {
-            print(GetPlotIndex(pos));
-            if (GetPlotIndex(pos) == -1 && plots[GetPlotIndex(pos)].treePlaced != TreeType.Nothing)
+            if (GetPlotIndex(pos) != -1 && plots[GetPlotIndex(pos)].treePlaced == TreeType.Nothing && (plots[GetPlotIndex(pos)].type & PlotType.Normal) != 0)
             {
-                return false;
+                return true;
             }
             else
             {
-                return true;
+                return false;
             }
         }
         else
@@ -113,7 +112,7 @@ public class InventoryManager : MonoBehaviour
         Vector3Int pos = selectorMap.WorldToCell(position);
         Vector2Int plotPos = GetPlotPosition(pos);
 
-        if (selectorPos != null)
+        if (selectorPos.x != 999 && selectorPos.y != 999)
         {
             if (selectorPos == plotPos)
                 return;
@@ -124,35 +123,33 @@ public class InventoryManager : MonoBehaviour
         if (plotPos.x == 999 || plotPos.y == 999)
             return;
 
+        bool canPlant = CanPlantAt(position);
         selectorPos = plotPos;
-        selectorMap.SetTile(new Vector3Int(plotPos.x * 4, plotPos.y * 4, 0), selector[0]);
-        selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + 1, plotPos.y * 4, 0), selector[1]);
-        selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + 2, plotPos.y * 4, 0), selector[1]);
-        selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + 3, plotPos.y * 4, 0), selector[2]);
-        selectorMap.SetTile(new Vector3Int(plotPos.x * 4, plotPos.y * 4 - 1, 0), selector[3]);
-        selectorMap.SetTile(new Vector3Int(plotPos.x * 4, plotPos.y * 4 - 2, 0), selector[3]);
-        selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + 3, plotPos.y * 4 - 1, 0), selector[4]);
-        selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + 3, plotPos.y * 4 - 2, 0), selector[4]);
-        selectorMap.SetTile(new Vector3Int(plotPos.x * 4, plotPos.y * 4 - 3, 0), selector[5]);
-        selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + 1, plotPos.y * 4 - 3, 0), selector[6]);
-        selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + 2, plotPos.y * 4 - 3, 0), selector[6]);
-        selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + 3, plotPos.y * 4 - 3, 0), selector[7]);
+        int i = -1;
+        for (int y = 0; y > -4; y--)
+        {
+            for (int x = 0; x < 4; x++)
+            {
+                i++;
+                if ((i == 5 || i == 6 || i == 9 || i == 10) && canPlant)
+                    continue;
+                treeMap.SetTile(new Vector3Int(plotPos.x * 4 + x, plotPos.y * 4 + y, 0), selector[i]);
+            }
+        }
     }
 
     private void HideSelector(Vector2Int pos)
     {
-        selectorMap.SetTile(new Vector3Int(pos.x * 4, pos.y * 4, 0), null);
-        selectorMap.SetTile(new Vector3Int(pos.x * 4 + 1, pos.y * 4, 0), null);
-        selectorMap.SetTile(new Vector3Int(pos.x * 4 + 2, pos.y * 4, 0), null);
-        selectorMap.SetTile(new Vector3Int(pos.x * 4 + 3, pos.y * 4, 0), null);
-        selectorMap.SetTile(new Vector3Int(pos.x * 4, pos.y * 4 - 1, 0), null);
-        selectorMap.SetTile(new Vector3Int(pos.x * 4, pos.y * 4 - 2, 0), null);
-        selectorMap.SetTile(new Vector3Int(pos.x * 4 + 3, pos.y * 4 - 1, 0), null);
-        selectorMap.SetTile(new Vector3Int(pos.x * 4 + 3, pos.y * 4 - 2, 0), null);
-        selectorMap.SetTile(new Vector3Int(pos.x * 4, pos.y * 4 - 3, 0), null);
-        selectorMap.SetTile(new Vector3Int(pos.x * 4 + 1, pos.y * 4 - 3, 0), null);
-        selectorMap.SetTile(new Vector3Int(pos.x * 4 + 2, pos.y * 4 - 3, 0), null);
-        selectorMap.SetTile(new Vector3Int(pos.x * 4 + 3, pos.y * 4 - 3, 0), null);
+        int i = 0;
+        for (int y = 0; y > -4; y--)
+        {
+            for (int x = 0; x < 4; x++)
+            {
+                treeMap.SetTile(new Vector3Int(pos.x * 4 + x, pos.y * 4 + y, 0), null);
+                i++;
+            }
+        }
+        selectorPos = new Vector2Int(999, 999);
     }
 
     private int GetPlotIndex(Vector3Int pos)

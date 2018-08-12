@@ -6837,6 +6837,17 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StartDraggin
       objectReference: {fileID: 0}
+    - target: {fileID: 114335858491737490, guid: 89e9215b05511f648b3306ce05aae35f,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 185619f28bb6b4e4099b789192032fc1,
+        type: 3}
+    - target: {fileID: 114335858491737490, guid: 89e9215b05511f648b3306ce05aae35f,
+        type: 2}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89e9215b05511f648b3306ce05aae35f, type: 2}
   m_IsPrefabAsset: 0
@@ -8984,6 +8995,17 @@ Prefab:
       propertyPath: m_Name
       value: Slot (01)
       objectReference: {fileID: 0}
+    - target: {fileID: 114335858491737490, guid: 89e9215b05511f648b3306ce05aae35f,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1a3fcd6f2906efa41923bcca16b00933,
+        type: 3}
+    - target: {fileID: 114335858491737490, guid: 89e9215b05511f648b3306ce05aae35f,
+        type: 2}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89e9215b05511f648b3306ce05aae35f, type: 2}
   m_IsPrefabAsset: 0
@@ -9635,14 +9657,66 @@ Tilemap:
   m_Enabled: 1
   m_Tiles: {}
   m_AnimatedTiles: {}
-  m_TileAssetArray: []
-  m_TileSpriteArray: []
-  m_TileMatrixArray: []
-  m_TileColorArray: []
+  m_TileAssetArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  m_TileSpriteArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  m_TileMatrixArray:
+  - m_RefCount: 0
+    m_Data:
+      e00: 1.2236147e-36
+      e01: 0
+      e02: NaN
+      e03: 0
+      e10: 0
+      e11: 0
+      e12: NaN
+      e13: 0
+      e20: NaN
+      e21: 0
+      e22: -236.8418
+      e23: 0
+      e30: 0
+      e31: -0.98803717
+      e32: 14.477788
+      e33: 0
+  m_TileColorArray:
+  - m_RefCount: 0
+    m_Data: {r: 4e-45, g: 4e-45, b: 4e-45, a: 4e-45}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 0, y: 0, z: 1}
+  m_Origin: {x: 0, y: -15, z: 0}
+  m_Size: {x: 7, y: 15, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -12984,10 +13058,18 @@ MonoBehaviour:
   selector:
   - {fileID: 11400000, guid: 8169ed9965d205d4ea5821521c5ea3f2, type: 2}
   - {fileID: 11400000, guid: a726686115c6e464ab505a8c838976e2, type: 2}
+  - {fileID: 11400000, guid: a726686115c6e464ab505a8c838976e2, type: 2}
   - {fileID: 11400000, guid: 51a80e85753557f4ea1d415df2a93e4a, type: 2}
   - {fileID: 11400000, guid: 3a322f8861c25c840b775e9c149e8d18, type: 2}
+  - {fileID: 11400000, guid: f6bf122ff7b64a04182e367da59faf77, type: 2}
+  - {fileID: 11400000, guid: 10edb90c42be78e4ea141655c794db18, type: 2}
+  - {fileID: 11400000, guid: 893120d224931d540bb7301d3aff620f, type: 2}
+  - {fileID: 11400000, guid: 3a322f8861c25c840b775e9c149e8d18, type: 2}
+  - {fileID: 11400000, guid: 4465db16e48abe946abf6e8974487afe, type: 2}
+  - {fileID: 11400000, guid: a801bfa68754dbc4a8d5191840add090, type: 2}
   - {fileID: 11400000, guid: 893120d224931d540bb7301d3aff620f, type: 2}
   - {fileID: 11400000, guid: ad2d05a258684b340a25d9221a44e350, type: 2}
+  - {fileID: 11400000, guid: 8078b45f9a3232446956ed5fdd47ddb8, type: 2}
   - {fileID: 11400000, guid: 8078b45f9a3232446956ed5fdd47ddb8, type: 2}
   - {fileID: 11400000, guid: 372baa95be60a3c479f80c3e34781e9d, type: 2}
   slots:
@@ -13009,7 +13091,7 @@ MonoBehaviour:
   items:
   - type: 1
     description: LE POKETEXTE OUIIIIIIIII
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 1a3fcd6f2906efa41923bcca16b00933, type: 3}
     tiles:
     - {fileID: 0}
     - {fileID: 11400000, guid: 9d866a74ea944d14f81bb4133b55bdc9, type: 2}
@@ -13030,7 +13112,7 @@ MonoBehaviour:
     count: 0
   - type: 0
     description: 
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 185619f28bb6b4e4099b789192032fc1, type: 3}
     tiles:
     - {fileID: 0}
     - {fileID: 11400000, guid: 93eb7068b8cafe040820f9cdd3937728, type: 2}
@@ -13051,7 +13133,7 @@ MonoBehaviour:
     count: 0
   - type: 0
     description: 
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: ea8d23bb37b53c9459b9d37b980d9ebf, type: 3}
     tiles:
     - {fileID: 11400000, guid: 1e14234e4e7eead4991788c699147ac6, type: 2}
     - {fileID: 11400000, guid: 0eabd7b48c7f1d74d8e2ebff00965d40, type: 2}
@@ -13211,19 +13293,19 @@ MonoBehaviour:
     treePlaced: 0
   - type: 4
     treePlaced: 0
-  - type: 48
+  - type: 49
     treePlaced: 0
-  - type: 32
-    treePlaced: 0
-  - type: 8
+  - type: 33
     treePlaced: 0
   - type: 8
     treePlaced: 0
   - type: 8
     treePlaced: 0
-  - type: 32
+  - type: 8
     treePlaced: 0
-  - type: 32
+  - type: 33
+    treePlaced: 0
+  - type: 33
     treePlaced: 0
   - type: 1
     treePlaced: 0
@@ -13660,6 +13742,17 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StartDraggin
       objectReference: {fileID: 0}
+    - target: {fileID: 114335858491737490, guid: 89e9215b05511f648b3306ce05aae35f,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d9d9e490f6867684cbf769acf98cf35a,
+        type: 3}
+    - target: {fileID: 114335858491737490, guid: 89e9215b05511f648b3306ce05aae35f,
+        type: 2}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89e9215b05511f648b3306ce05aae35f, type: 2}
   m_IsPrefabAsset: 0
@@ -13801,6 +13894,17 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StartDraggin
+      objectReference: {fileID: 0}
+    - target: {fileID: 114335858491737490, guid: 89e9215b05511f648b3306ce05aae35f,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ea8d23bb37b53c9459b9d37b980d9ebf,
+        type: 3}
+    - target: {fileID: 114335858491737490, guid: 89e9215b05511f648b3306ce05aae35f,
+        type: 2}
+      propertyPath: m_PreserveAspect
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89e9215b05511f648b3306ce05aae35f, type: 2}
