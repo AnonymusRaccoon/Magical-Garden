@@ -1,9 +1,9 @@
 ﻿[System.Serializable]
 public class Plot
 {
-    [EnumFlagsAttribute]
+    [EnumFlags]
     public PlotType type;
-    public bool isUsed;
+    public TreeType treePlaced;
 }
 
 [System.Flags]
