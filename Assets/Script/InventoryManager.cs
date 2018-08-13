@@ -63,7 +63,7 @@ public class InventoryManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             ClearBoard();
-            GetComponent<Mission>().GenerateMission();
+            //GetComponent<Mission>().GenerateMission();
             GetComponent<Mission>().WinUI.SetActive(false);
             GetComponent<Pokedex>().UpdateMissionText();
         }
