@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -14159,7 +14159,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: c2990fc2c1e85b84b8bb7b8ce8e0a1c6, type: 2}
     - {fileID: 11400000, guid: af72725ced11a594f8d5bc859c9a25f0, type: 2}
     - {fileID: 11400000, guid: b37f3e5d6ce1f044dbdc9fa665c7041a, type: 2}
-    canBePlacedOn: 16
+    canBePlacedOn: 2
     count: 0
     maxInstanceForWin: 0
   - type: 3
@@ -14398,54 +14398,79 @@ MonoBehaviour:
   plots:
   - type: 17
     treePlaced: 0
+    startIndex: 0
   - type: 17
     treePlaced: 0
+    startIndex: 0
   - type: 17
     treePlaced: 0
+    startIndex: 0
   - type: 1
     treePlaced: 0
+    startIndex: 0
   - type: 1
     treePlaced: 0
+    startIndex: 0
   - type: 17
     treePlaced: 0
+    startIndex: 0
   - type: 4
     treePlaced: 0
+    startIndex: 0
   - type: 4
     treePlaced: 0
+    startIndex: 0
   - type: 49
     treePlaced: 0
+    startIndex: 0
   - type: 33
     treePlaced: 0
+    startIndex: 0
   - type: 8
     treePlaced: 0
+    startIndex: 0
   - type: 8
     treePlaced: 0
+    startIndex: 0
   - type: 8
     treePlaced: 0
+    startIndex: 0
   - type: 33
     treePlaced: 0
+    startIndex: 0
   - type: 33
     treePlaced: 0
+    startIndex: 0
   - type: 1
     treePlaced: 0
+    startIndex: 0
   - type: 2
     treePlaced: 0
+    startIndex: 0
   - type: 2
     treePlaced: 0
+    startIndex: 0
   - type: 1
     treePlaced: 0
+    startIndex: 0
   - type: 2
     treePlaced: 0
+    startIndex: 0
   - type: 1
     treePlaced: 0
+    startIndex: 0
   - type: 1
     treePlaced: 0
+    startIndex: 0
   - type: 1
     treePlaced: 0
+    startIndex: 0
   - type: 1
     treePlaced: 0
+    startIndex: 0
   - type: 1
     treePlaced: 0
+    startIndex: 0
   draggedPosition: -1
 --- !u!4 &1724986184
 Transform:
