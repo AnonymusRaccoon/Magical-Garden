@@ -27,7 +27,8 @@ public class Mission : MonoBehaviour {
         }
        
     }
-    private void GenerateMission()
+
+    public void GenerateMission()
     {
         for (int i = 0; i < difficulte; i++)
         {

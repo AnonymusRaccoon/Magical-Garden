@@ -60,6 +60,12 @@ public class InventoryManager : MonoBehaviour
             }
             draggedPosition = -1;
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ClearBoard();
+            GetComponent<Mission>().GenerateMission();
+            GetComponent<Pokedex>().UpdateMissionText();
+        }
     }
 
     private bool CanPlantAt(Vector3 position, TreeItem item)
