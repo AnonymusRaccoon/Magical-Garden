@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using TMPro;
 using UnityEngine.UI;
+using System.Linq;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -279,6 +280,21 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
+
+        if (UserHasWon())
+        {
+            GetComponent<Mission>().HasWon();
+        }
+    }
+
+    private bool UserHasWon()
+    {
+        foreach (KeyValuePair<TreeType, int> pair in GetComponent<Mission>().Objectifs)
+        {
+            if (plots.Count(x => x.treePlaced == pair.Key) < pair.Value)
+                return false;
+        }
+        return true;
     }
 
     public void StartDraggin(int index)
