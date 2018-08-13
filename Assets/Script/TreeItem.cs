@@ -16,10 +16,13 @@ public class TreeItem
 public enum TreeType
 {
     Nothing,
+    AppleTree,
+    JSP,
+    TribbleTree,
+    Lol,
+    SwapTree,
+    Nop,
     ThirstyTree,
     Cactus,
-    AppleTree,
-    TribbleTree,
-    SwapTree,
     ChameleonTree
 };

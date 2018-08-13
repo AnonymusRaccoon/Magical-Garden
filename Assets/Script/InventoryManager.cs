@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class InventoryManager : MonoBehaviour
@@ -80,21 +82,26 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-
+        //Spawn Power
         switch (item.type)
         {
-            case TreeType.AppleTree:
-                break;
             default:
                 break;
         }
 
-        CallPowers();
+        CallOtherPowers();
     }
 
-    private void CallPowers()
+    private async void CallOtherPowers()
     {
-
+        await Task.Delay(1000);
+        foreach(Plot plot in plots)
+        {
+            if (plot.treePlaced == TreeType.TribbleTree)
+            {
+                List<Plot> freePlots = new List<Plot>();
+            }
+        }
     }
 
     public void StartDraggin(int index)
