@@ -103,13 +103,6 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        //Spawn Power
-        switch (item.type)
-        {
-            default:
-                break;
-        }
-
         CallOtherPowers();
     }
 
@@ -128,14 +121,23 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        //Spawn Power
-        switch (item.type)
-        {
-            default:
-                break;
-        }
-
         //CallOtherPowers();
+    }
+
+    private void DeleteTreeAt(int index)
+    {
+        Vector2Int plotPos = GetPlotPositionByIndex(index);
+        plots[index].treePlaced = TreeType.Nothing;
+
+        int i = 0;
+        for (int y = 0; y > -4; y--)
+        {
+            for (int x = 0; x < 4; x++)
+            {
+                treeMap.SetTile(new Vector3Int(plotPos.x * 4 + x, plotPos.y * 4 + y, 0), null);
+                i++;
+            }
+        }
     }
 
     private async void CallOtherPowers()
@@ -166,6 +168,28 @@ public class InventoryManager : MonoBehaviour
                     int r = Random.Range(0, freePlots.Count);
                     dontCallPlotPower.Add(freePlots[r]);
                     PlaceTree(items[(int)TreeType.TribbleTree - 1], freePlots[r]);
+                    await Task.Delay(1000);
+                }
+            }
+            else if(plots[i].treePlaced == TreeType.ThirstyTree)
+            {
+                List<int> plot = new List<int>();
+
+                if (i - 1 >= 0 && i % 5 != 0 && plots[i - 1].treePlaced == TreeType.Cactus)
+                    plot.Add(i - 1);
+                if (i + 1 <= 24 && i % 5 != 4 && plots[i + 1].treePlaced == TreeType.Cactus)
+                    plot.Add(i + 1);
+                if (i - 5 >= 0 && plots[i - 5].treePlaced == TreeType.Cactus)
+                    plot.Add(i - 5);
+                if (i + 5 <= 24 && plots[i + 5].treePlaced == TreeType.Cactus)
+                    plot.Add(i + 5);
+
+                if(plot.Count > 0)
+                {
+                    int r = Random.Range(0, plot.Count);
+                    dontCallPlotPower.Add(plot[r]);
+                    DeleteTreeAt(i);
+                    PlaceTree(items[(int)TreeType.Cactus - 1], plot[r]);
                     await Task.Delay(1000);
                 }
             }
