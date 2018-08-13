@@ -17,10 +17,15 @@ public class InventoryManager : MonoBehaviour
     public TreeItem[] items = new TreeItem[15];
     public Plot[] plots = new Plot[25];
 
-    private int draggedPosition = -1;
+    public int draggedPosition = -1;
     private Vector3 defaultPos;
     private Vector2Int selectorPos;
 
+
+    private void Start()
+    {
+        InventorySlot.manager = this;
+    }
 
     private void Update()
     {
