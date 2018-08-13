@@ -153,13 +153,15 @@ public class InventoryManager : MonoBehaviour
 
             while(!CanPlantAt(index, tree))
             {
-                print(index);
                 index++;
-                if (index > plots.Length)
-                    continue;
+                if (index == plots.Length)
+                    break;
             }
 
-            PlaceTree(tree, index);
+            if (index != plots.Length)
+                PlaceTree(tree, index);
+            else
+                i--;
         }
     }
 
