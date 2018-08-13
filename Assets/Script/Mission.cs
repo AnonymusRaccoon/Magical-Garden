@@ -9,6 +9,7 @@ public class Mission : MonoBehaviour {
     public int minDrop;
     public int itemDrop;
     public Dictionary<TreeType, int> Objectifs = new Dictionary<TreeType, int>();
+    public GameObject WinUI; 
     private void Start()
     {
         items = GetComponent<InventoryManager>().items;
@@ -89,6 +90,6 @@ public class Mission : MonoBehaviour {
 
     public void HasWon()
     {
-
+        WinUI.SetActive(true);
     }
 }
