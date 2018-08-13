@@ -124,6 +124,8 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
+        plots[index].startIndex = index;
+
         CallPowers(index);
     }
 
@@ -337,6 +339,53 @@ public class InventoryManager : MonoBehaviour
 
                     await Task.Delay(1000);
                 }
+            }
+            else if (plots[i].treePlaced == TreeType.RoundabboutTree)
+            {
+                if(plots[i].startIndex == i)
+                {
+                    if (i - 1 >= 0 && i % 5 != 0 && i + 5 <= 24)
+                    {
+                        TreeType firstType = plots[i - 1].treePlaced;
+                        TreeType secondType = plots[i + 4].treePlaced;
+                        TreeType thirdType = plots[i + 5].treePlaced;
+                        PlaceTree(items[(int)TreeType.RoundabboutTree], i - 1);
+                        PlaceTree(items[(int)firstType], i + 4);
+                        PlaceTree(items[(int)secondType], i + 5);
+                        PlaceTree(items[(int)thirdType], i );
+                    }
+                }
+                else if (plots[i].startIndex == i + 1)
+                {
+                    TreeType firstType = plots[i + 5].treePlaced;
+                    TreeType secondType = plots[i + 6].treePlaced;
+                    TreeType thirdType = plots[i + 1].treePlaced;
+                    PlaceTree(items[(int)TreeType.RoundabboutTree], i + 5);
+                    PlaceTree(items[(int)firstType], i + 6);
+                    PlaceTree(items[(int)secondType], i + 1);
+                    PlaceTree(items[(int)thirdType], i);
+                }
+                else if (plots[i].startIndex == i + 4)
+                {
+                    TreeType firstType = plots[i + 1].treePlaced;
+                    TreeType secondType = plots[i - 4].treePlaced;
+                    TreeType thirdType = plots[i - 5].treePlaced;
+                    PlaceTree(items[(int)TreeType.RoundabboutTree], i + 1);
+                    PlaceTree(items[(int)firstType], i - 4);
+                    PlaceTree(items[(int)secondType], i - 5);
+                    PlaceTree(items[(int)thirdType], i);
+                }
+                else if (plots[i].startIndex == i + 5)
+                {
+                    TreeType firstType = plots[i - 5].treePlaced;
+                    TreeType secondType = plots[i - 4].treePlaced;
+                    TreeType thirdType = plots[i - 1].treePlaced;
+                    PlaceTree(items[(int)TreeType.RoundabboutTree], i - 5);
+                    PlaceTree(items[(int)firstType], i - 4);
+                    PlaceTree(items[(int)secondType], i - 1);
+                    PlaceTree(items[(int)thirdType], i);
+                }
+
             }
         }
 
