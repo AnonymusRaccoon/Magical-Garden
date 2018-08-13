@@ -64,6 +64,7 @@ public class InventoryManager : MonoBehaviour
         {
             ClearBoard();
             GetComponent<Mission>().GenerateMission();
+            GetComponent<Mission>().WinUI.SetActive(false);
             GetComponent<Pokedex>().UpdateMissionText();
         }
     }
