@@ -12,6 +12,7 @@ public class InventoryManager : MonoBehaviour
     public Tilemap treeMap;
     public Tilemap selectorMap;
     public TileBase[] selector;
+    public TextMeshProUGUI turnCount;
 
     [Space]
     public GameObject[] slots;
@@ -47,7 +48,7 @@ public class InventoryManager : MonoBehaviour
                 items[draggedPosition].count -= 1;
                 slots[draggedPosition].transform.GetChild(1).position = defaultPos;
                 TextMeshProUGUI CompteurItem = slots[draggedPosition].GetComponentInChildren<TextMeshProUGUI>();
-                CompteurItem.text = items[draggedPosition].count.ToString();
+                CompteurItem.text = items[draggedPosition].count.ToString().Length < 10 ? "0" + items[draggedPosition].count.ToString() : items[draggedPosition].count.ToString();
                 if (items[draggedPosition].count < 1)
                 {
                     slots[draggedPosition].transform.GetChild(1).GetComponent<Image>().sprite = items[draggedPosition].iconGris;
@@ -66,7 +67,7 @@ public class InventoryManager : MonoBehaviour
         Vector3Int pos = treeMap.WorldToCell(position);
         if (-8 <= pos.x && pos.x <= 11 && -15 <= pos.y && pos.y <= 4)
         {
-            if (GetPlotIndex(pos) != -1 && (plots[GetPlotIndex(pos)].treePlaced == TreeType.Nothing || (plots[GetPlotIndex(pos)].treePlaced & item.canOverrideTree) != 0) && (plots[GetPlotIndex(pos)].type & item.canBePlacedOn) != 0)
+            if (GetPlotIndex(pos) != -1 && plots[GetPlotIndex(pos)].treePlaced == TreeType.Nothing && (plots[GetPlotIndex(pos)].type & item.canBePlacedOn) != 0)
             {
                 return true;
             }
@@ -279,6 +280,27 @@ public class InventoryManager : MonoBehaviour
                     await Task.Delay(1000);
                 }
             }
+            else if (plots[i].treePlaced == TreeType.GluttonTree)
+            {
+                List<int> plot = new List<int>();
+
+                if (i - 1 >= 0 && i % 5 != 0 && plots[i - 1].treePlaced != TreeType.Nothing)
+                    plot.Add(i - 1);
+                if (i + 1 <= 24 && i % 5 != 4 && plots[i + 1].treePlaced != TreeType.Nothing)
+                    plot.Add(i + 1);
+                if (i - 5 >= 0 && plots[i - 5].treePlaced != TreeType.Nothing)
+                    plot.Add(i - 5);
+                if (i + 5 <= 24 && plots[i + 5].treePlaced != TreeType.Nothing)
+                    plot.Add(i + 5);
+
+                if (plot.Count > 0)
+                {
+                    foreach(int index in plot)
+                        PlaceTree(items[(int)TreeType.Trunk - 1], index);
+
+                    await Task.Delay(1000);
+                }
+            }
         }
 
         if (UserHasWon())
@@ -289,6 +311,9 @@ public class InventoryManager : MonoBehaviour
 
     private bool UserHasWon()
     {
+        int turn = int.Parse(turnCount.text.Substring(5)) + 1;
+        turnCount.text = "Turn: " + (turn < 10 ? "0" + turn.ToString() : turn.ToString());
+        GetComponent<Pokedex>().UpdateMissionText();
         foreach (KeyValuePair<TreeType, int> pair in GetComponent<Mission>().Objectifs)
         {
             if (plots.Count(x => x.treePlaced == pair.Key) < pair.Value)
@@ -299,12 +324,34 @@ public class InventoryManager : MonoBehaviour
 
     public void StartDraggin(int index)
     {
-        //if(items[index].count > 0)
-        //{
+        if (items[index].count > 0)
+        {
             slots[index].transform.SetAsLastSibling();
             draggedPosition = index;
             defaultPos = slots[draggedPosition].transform.position;
-        //}
+        }
+    }
+
+    public void UpdateUI()
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            slots[i].GetComponentInChildren<TextMeshProUGUI>().text = items[i].count.ToString().Length < 10 ? "0" + items[i].count.ToString(): items[i].count.ToString();
+            if(items[i].count == 0)
+                slots[i].transform.GetChild(1).GetComponent<Image>().sprite = items[i].iconGris;
+            else
+                slots[i].transform.GetChild(1).GetComponent<Image>().sprite = items[i].icon;
+        }
+    }
+
+    public int TreePlaced(TreeType type)
+    {
+        int x = 0;
+        foreach (Plot plot in plots)
+            if (plot.treePlaced == type)
+                x++;
+
+        return x;
     }
 
     //public void AddItem(TreeItem item)
