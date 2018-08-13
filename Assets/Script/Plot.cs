@@ -4,6 +4,8 @@ public class Plot
     [EnumFlags]
     public PlotType type;
     public TreeType treePlaced;
+
+    public int startIndex;
 }
 
 [System.Flags]

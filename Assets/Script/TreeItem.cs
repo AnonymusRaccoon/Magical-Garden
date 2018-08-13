@@ -19,7 +19,7 @@ public enum TreeType
 {
     Nothing,
     AppleTree,
-    Unamed0,
+    RoundabboutTree,
     TribbleTree,
     Unamed1,
     SwapTree,
