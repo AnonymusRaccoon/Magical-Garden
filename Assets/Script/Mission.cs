@@ -1,19 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
+﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class Mission : MonoBehaviour {
 
-    string Missiontext = null;
     TreeItem[] items;
     public float difficulte;
     public int minDrop;
     public int itemDrop;
     public Dictionary<TreeType, int> Objectifs = new Dictionary<TreeType, int>();
-    public int MinArbre = 1;
-    public int MaxArbre = 10;
     private void Start()
     {
         items = GetComponent<InventoryManager>().items;
@@ -36,11 +31,12 @@ public class Mission : MonoBehaviour {
     {
         for (int i = 0; i < difficulte; i++)
         {
-            Objectifs.Add(ChoisirUnTypeDarbre(), Random.Range(MinArbre, MaxArbre)); 
+            AddTree();
         }
+        string mission = null;
         foreach (KeyValuePair<TreeType,int> i in Objectifs)
         {
-            Missiontext = Missiontext + "Place: " + i.Value + " " + i.Key.ToString() +"\n";
+            mission = mission + "Place: " + i.Value + " " + i.Key.ToString() +"\n";
         }
 
         GiveTrees();
@@ -70,13 +66,24 @@ public class Mission : MonoBehaviour {
 
     public string GetMissionText()
     {
-        return Missiontext;  
+        string mission = null;
+        foreach (KeyValuePair<TreeType, int> i in Objectifs)
+        {
+            mission = mission + "Place: " + i.Value + " " + i.Key.ToString() + " (" + (i.Value - GetComponent<InventoryManager>().TreePlaced(i.Key)) + " Left)\n";
+        }
+        return mission;
     }
 
-    private TreeType ChoisirUnTypeDarbre()
+    private void AddTree()
     {
-        TreeType arbre = items.Where(x => !Objectifs.ContainsKey(x.type) && x.type != TreeType.Nothing).ToArray()[Random.Range(0, items.Where(x => !Objectifs.ContainsKey(x.type) && x.type != TreeType.Nothing).ToArray().Length)].type;
-        return arbre;
+        TreeItem[] trees = items.Where(x => !Objectifs.ContainsKey(x.type) && x.type != TreeType.Nothing).ToArray();
+        if (trees.Length > 0)
+        {
+            int i = Random.Range(0, trees.Length);
+            TreeType type = trees[i].type;
+            int number = Random.Range(items[i].maxInstanceForWin / 2, items[i].maxInstanceForWin);
+            Objectifs.Add(type, number);
+        }
     }
 
     public void HasWon()

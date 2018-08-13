@@ -9,20 +9,20 @@ public class TreeItem
     public Sprite icon;
     public Sprite iconGris;
     public TileBase[] tiles = new TileBase[16];
-    [EnumFlags] public TreeType canOverrideTree;
     [EnumFlags] public PlotType canBePlacedOn;
     public int count;
+    public int maxInstanceForWin;
 }
 
 public enum TreeType
 {
     Nothing,
     AppleTree,
-    ChameleonTree,
-    TribbleTree,
     Unamed0,
-    SwapTree,
+    TribbleTree,
     Unamed1,
+    SwapTree,
+    GluttonTree,
     ThirstyTree,
     Cactus,
     Trunk = 16
