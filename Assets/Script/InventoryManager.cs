@@ -75,10 +75,7 @@ public class InventoryManager : MonoBehaviour
 
     private bool CanPlantAt(int index, TreeItem item)
     {
-        print("Type: " +  item.type);
-        print("Tree Type: " + (plots[index].treePlaced == TreeType.Nothing));
-        print("Plot Type: " + ((plots[index].type & item.canBePlacedOn) != 0));
-        if (index != -1 && (plots[index].treePlaced == TreeType.Nothing || (plots[index].treePlaced & item.canOverrideTree) != 0) && (plots[index].type & item.canBePlacedOn) != 0)
+        if (index != -1 && (plots[index].treePlaced == TreeType.Nothing/* || (plots[index].treePlaced & item.canOverrideTree) != 0*/) && (plots[index].type & item.canBePlacedOn) != 0)
         {
             return true;
         }
@@ -105,14 +102,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        //Spawn Power
-        switch (item.type)
-        {
-            default:
-                break;
-        }
-
-        CallOtherPowers();
+        CallPowers(index);
     }
 
     private void PlaceTree(TreeItem item, int index)
@@ -129,40 +119,157 @@ public class InventoryManager : MonoBehaviour
                 i++;
             }
         }
-
-        //Spawn Power
-        switch (item.type)
-        {
-            default:
-                break;
-        }
-
-        CallOtherPowers();
     }
 
-    private async void CallOtherPowers()
+    private void DeleteTreeAt(int index)
     {
+        Vector2Int plotPos = GetPlotPositionByIndex(index);
+        plots[index].treePlaced = TreeType.Nothing;
+
+        int i = 0;
+        for (int y = 0; y > -4; y--)
+        {
+            for (int x = 0; x < 4; x++)
+            {
+                treeMap.SetTile(new Vector3Int(plotPos.x * 4 + x, plotPos.y * 4 + y, 0), null);
+                i++;
+            }
+        }
+    }
+
+    private async void CallPowers(int spawnIndex)
+    {
+        List<int> dontCallPlotPower = new List<int>();
+
+        //Spawn Power;
+        if (plots[spawnIndex].treePlaced == TreeType.SwapTree)
+        {
+            List<int> plot = new List<int>();
+
+            if (spawnIndex - 1 >= 0 && spawnIndex % 5 != 0 && plots[spawnIndex - 1].treePlaced != TreeType.Nothing)
+                plot.Add(spawnIndex - 1);
+            if (spawnIndex + 1 <= 24 && spawnIndex % 5 != 4 && plots[spawnIndex + 1].treePlaced != TreeType.Nothing)
+                plot.Add(spawnIndex + 1);
+            if (spawnIndex - 5 >= 0 && plots[spawnIndex - 5].treePlaced != TreeType.Nothing)
+                plot.Add(spawnIndex - 5);
+            if (spawnIndex + 5 <= 24 && plots[spawnIndex + 5].treePlaced != TreeType.Nothing)
+                plot.Add(spawnIndex + 5);
+
+            if (plot.Count > 0)
+            {
+                await Task.Delay(1000);
+                int r = Random.Range(0, plot.Count);
+                dontCallPlotPower.Add(plot[r]);
+                PlaceTree(items[(int)plots[plot[r]].treePlaced - 1], spawnIndex);
+                PlaceTree(items[(int)TreeType.SwapTree - 1], plot[r]);
+            }
+        }
+
+        //Check for other powers
+        List<int> callPowers = new List<int>();
+        int p = -1;
         await Task.Delay(1000);
         for (int i = 0; i < 25; i++)
         {
+            if (callPowers.Count > 0)
+            {
+                p = i - 1;
+                i = callPowers[0];
+                callPowers.RemoveAt(0);
+            }
+            else if(p != -1)
+            {
+                i = p;
+                p = -1;
+            }
+
+            if (dontCallPlotPower.Contains(i))
+                continue;
+
             if (plots[i].treePlaced == TreeType.TribbleTree)
             {
                 List<int> freePlots = new List<int>();
 
-                if (i - 1 >= 0 && i % 5 != 0 && CanPlantAt(i - 1, items[(int)TreeType.TribbleTree]))
+                if (i - 1 >= 0 && i % 5 != 0 && CanPlantAt(i - 1, items[(int)TreeType.TribbleTree - 1]))
                     freePlots.Add(i - 1);
-                if (i + 1 <= 24 && i % 5 != 4 && CanPlantAt(i + 1, items[(int)TreeType.TribbleTree]))
+                if (i + 1 <= 24 && i % 5 != 4 && CanPlantAt(i + 1, items[(int)TreeType.TribbleTree - 1]))
                     freePlots.Add(i + 1);
-                if (i - 5 >= 0 && CanPlantAt(i - 5, items[(int)TreeType.TribbleTree]))
+                if (i - 5 >= 0 && CanPlantAt(i - 5, items[(int)TreeType.TribbleTree - 1]))
                     freePlots.Add(i - 5);
-                if (i + 5 <= 24 && CanPlantAt(i + 5, items[(int)TreeType.TribbleTree]))
+                if (i + 5 <= 24 && CanPlantAt(i + 5, items[(int)TreeType.TribbleTree - 1]))
                     freePlots.Add(i + 5);
 
-                print(freePlots.Count);
 
                 if(freePlots.Count > 0)
                 {
-                    PlaceTree(items[(int)TreeType.ThirstyTree], Random.Range(0, freePlots.Count - 1));
+                    int r = Random.Range(0, freePlots.Count);
+                    dontCallPlotPower.Add(freePlots[r]);
+                    PlaceTree(items[(int)TreeType.TribbleTree - 1], freePlots[r]);
+                    await Task.Delay(1000);
+                }
+
+                List<int> plot = new List<int>();
+
+                if (i - 1 >= 0 && i % 5 != 0 && plots[i - 1].treePlaced == TreeType.AppleTree)
+                    plot.Add(i - 1);
+                if (i + 1 <= 24 && i % 5 != 4 && plots[i + 1].treePlaced == TreeType.AppleTree)
+                    plot.Add(i + 1);
+                if (i - 5 >= 0 && plots[i - 5].treePlaced == TreeType.AppleTree)
+                    plot.Add(i - 5);
+                if (i + 5 <= 24 && plots[i + 5].treePlaced == TreeType.AppleTree)
+                    plot.Add(i + 5);
+
+                if (plot.Count > 0)
+                {
+                    foreach (int r in plot)
+                    {
+                        PlaceTree(items[(int)TreeType.Trunk - 1], r);
+                    }
+                    await Task.Delay(1000);
+                }
+            }
+            else if(plots[i].treePlaced == TreeType.ThirstyTree)
+            {
+                List<int> plot = new List<int>();
+
+                if (i - 1 >= 0 && i % 5 != 0 && plots[i - 1].treePlaced == TreeType.Cactus)
+                    plot.Add(i - 1);
+                if (i + 1 <= 24 && i % 5 != 4 && plots[i + 1].treePlaced == TreeType.Cactus)
+                    plot.Add(i + 1);
+                if (i - 5 >= 0 && plots[i - 5].treePlaced == TreeType.Cactus)
+                    plot.Add(i - 5);
+                if (i + 5 <= 24 && plots[i + 5].treePlaced == TreeType.Cactus)
+                    plot.Add(i + 5);
+
+                if(plot.Count > 0)
+                {
+                    int r = Random.Range(0, plot.Count);
+                    dontCallPlotPower.Add(plot[r]);
+                    DeleteTreeAt(i);
+                    PlaceTree(items[(int)TreeType.AppleTree - 1], plot[r]);
+                    await Task.Delay(1000);
+                }
+            }
+            else if (plots[i].treePlaced == TreeType.SwapTree && ((i - 1 >= 0 && i % 5 != 0 && plots[i - 1].treePlaced == TreeType.AppleTree) || (i + 1 <= 24 && i % 5 != 4 && plots[i + 1].treePlaced == TreeType.AppleTree) || (i - 5 >= 0 && plots[i - 5].treePlaced == TreeType.AppleTree) || (i + 5 <= 24 && plots[i + 5].treePlaced == TreeType.AppleTree)))
+            {
+                List<int> plot = new List<int>();
+
+                if (i - 1 >= 0 && i % 5 != 0 && plots[i - 1].treePlaced != TreeType.Nothing)
+                    plot.Add(i - 1);
+                if (i + 1 <= 24 && i % 5 != 4 && plots[i + 1].treePlaced != TreeType.Nothing)
+                    plot.Add(i + 1);
+                if (i - 5 >= 0 && plots[i - 5].treePlaced != TreeType.Nothing)
+                    plot.Add(i - 5);
+                if (i + 5 <= 24 && plots[i + 5].treePlaced != TreeType.Nothing)
+                    plot.Add(i + 5);
+
+                if (plot.Count > 0)
+                {
+                    int r = Random.Range(0, plot.Count);
+                    dontCallPlotPower.Add(plot[r]);
+                    callPowers.Add(i);
+                    PlaceTree(items[(int)plots[plot[r]].treePlaced - 1], i);
+                    PlaceTree(items[(int)TreeType.SwapTree - 1], plot[r]);
                     await Task.Delay(1000);
                 }
             }
@@ -171,9 +278,12 @@ public class InventoryManager : MonoBehaviour
 
     public void StartDraggin(int index)
     {
-        slots[index].transform.SetAsLastSibling();
-        draggedPosition = index;
-        defaultPos = slots[draggedPosition].transform.position;
+        //if(items[index].count > 0)
+        //{
+            slots[index].transform.SetAsLastSibling();
+            draggedPosition = index;
+            defaultPos = slots[draggedPosition].transform.position;
+        //}
     }
 
     //public void AddItem(TreeItem item)
@@ -243,8 +353,7 @@ public class InventoryManager : MonoBehaviour
 
     private Vector2Int GetPlotPositionByIndex(int index)
     {
-        print(new Vector2Int(index / 5, 5 - index % 5));
-        return new Vector2Int(index / 5, 5 - index % 5);
+        return new Vector2Int(index % 5 - 2, index / 5 - 3);
     }
 
     private Vector2Int GetPlotPosition(Vector3Int position)

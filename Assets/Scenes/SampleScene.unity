@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13358,7 +13358,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9cb1415fe0889b34b85613c01a46b855, type: 2}
     - {fileID: 11400000, guid: f9daa4e1889a5c94eb3bc185cb5f6fb3, type: 2}
     - {fileID: 0}
-    canOverrideTree: 2
+    canOverrideTree: 0
     canBePlacedOn: 3
     count: 0
   - type: 0
@@ -13479,7 +13479,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 479a6c0ea55dd864aa07a48020a25d5d, type: 2}
     - {fileID: 0}
     canOverrideTree: 0
-    canBePlacedOn: 2
+    canBePlacedOn: 3
     count: 0
   - type: 0
     description: 
@@ -13534,6 +13534,30 @@ MonoBehaviour:
     icon: {fileID: 0}
     iconGris: {fileID: 0}
     tiles: []
+    canOverrideTree: 0
+    canBePlacedOn: 0
+    count: 0
+  - type: 16
+    description: 
+    icon: {fileID: 0}
+    iconGris: {fileID: 0}
+    tiles:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: ac329e91b2f0735488b835160079327c, type: 2}
+    - {fileID: 11400000, guid: c1e09d1d051d1c4449475caa5bf6d0d7, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 64e7875e478cd274a858b5612237db49, type: 2}
+    - {fileID: 11400000, guid: 64668e68641695d4fb75f355287379c1, type: 2}
+    - {fileID: 0}
     canOverrideTree: 0
     canBePlacedOn: 0
     count: 0

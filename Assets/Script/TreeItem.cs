@@ -25,4 +25,5 @@ public enum TreeType
     Unamed1,
     ThirstyTree,
     Cactus,
+    Trunk = 16
 };
