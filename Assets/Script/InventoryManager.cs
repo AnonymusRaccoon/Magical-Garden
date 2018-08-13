@@ -207,6 +207,26 @@ public class InventoryManager : MonoBehaviour
                     PlaceTree(items[(int)TreeType.TribbleTree - 1], freePlots[r]);
                     await Task.Delay(1000);
                 }
+
+                List<int> plot = new List<int>();
+
+                if (i - 1 >= 0 && i % 5 != 0 && plots[i - 1].treePlaced == TreeType.AppleTree)
+                    plot.Add(i - 1);
+                if (i + 1 <= 24 && i % 5 != 4 && plots[i + 1].treePlaced == TreeType.AppleTree)
+                    plot.Add(i + 1);
+                if (i - 5 >= 0 && plots[i - 5].treePlaced == TreeType.AppleTree)
+                    plot.Add(i - 5);
+                if (i + 5 <= 24 && plots[i + 5].treePlaced == TreeType.AppleTree)
+                    plot.Add(i + 5);
+
+                if (plot.Count > 0)
+                {
+                    foreach (int r in plot)
+                    {
+                        PlaceTree(items[(int)TreeType.Trunk - 1], r);
+                    }
+                    await Task.Delay(1000);
+                }
             }
             else if(plots[i].treePlaced == TreeType.ThirstyTree)
             {
@@ -258,12 +278,12 @@ public class InventoryManager : MonoBehaviour
 
     public void StartDraggin(int index)
     {
-        if(items[index].count > 0)
-        {
+        //if(items[index].count > 0)
+        //{
             slots[index].transform.SetAsLastSibling();
             draggedPosition = index;
             defaultPos = slots[draggedPosition].transform.position;
-        }
+        //}
     }
 
     //public void AddItem(TreeItem item)
