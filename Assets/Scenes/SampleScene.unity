@@ -13089,7 +13089,7 @@ MonoBehaviour:
   - {fileID: 292199874}
   - {fileID: 798873072}
   items:
-  - type: 1
+  - type: 3
     description: LE POKETEXTE OUIIIIIIIII
     icon: {fileID: 21300000, guid: 1a3fcd6f2906efa41923bcca16b00933, type: 3}
     tiles:
@@ -13109,6 +13109,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: ca64649711c32e045acc87a7b826744b, type: 2}
     - {fileID: 11400000, guid: 802eedf913287cc4596701ec2a9c034e, type: 2}
     - {fileID: 0}
+    canOverrideTree: 0
+    canBePlacedOn: 1
     count: 0
   - type: 0
     description: 
@@ -13130,8 +13132,10 @@ MonoBehaviour:
     - {fileID: 11400000, guid: c2990fc2c1e85b84b8bb7b8ce8e0a1c6, type: 2}
     - {fileID: 11400000, guid: af72725ced11a594f8d5bc859c9a25f0, type: 2}
     - {fileID: 11400000, guid: b37f3e5d6ce1f044dbdc9fa665c7041a, type: 2}
+    canOverrideTree: 0
+    canBePlacedOn: 0
     count: 0
-  - type: 0
+  - type: 4
     description: 
     icon: {fileID: 21300000, guid: ea8d23bb37b53c9459b9d37b980d9ebf, type: 3}
     tiles:
@@ -13151,6 +13155,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9cb1415fe0889b34b85613c01a46b855, type: 2}
     - {fileID: 11400000, guid: f9daa4e1889a5c94eb3bc185cb5f6fb3, type: 2}
     - {fileID: 0}
+    canOverrideTree: 8
+    canBePlacedOn: 3
     count: 0
   - type: 0
     description: 
@@ -13172,6 +13178,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: e1695f67b739bf443b93716fadeb206e, type: 2}
     - {fileID: 11400000, guid: 55c50fef1803b224d9b32a7a3ed9fb86, type: 2}
     - {fileID: 0}
+    canOverrideTree: 0
+    canBePlacedOn: 0
     count: 0
   - type: 0
     description: 
@@ -13193,6 +13201,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 2f5bb6339b119ee47930776f411ce4e3, type: 2}
     - {fileID: 11400000, guid: e4aa9d2fd8a0726488dc847599ec3991, type: 2}
     - {fileID: 0}
+    canOverrideTree: 0
+    canBePlacedOn: 0
     count: 0
   - type: 0
     description: 
@@ -13214,6 +13224,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 119c16f591540494f873ab8c65a59a0a, type: 2}
     - {fileID: 11400000, guid: 77555c2999367d9428a207ba9b2cddd4, type: 2}
     - {fileID: 0}
+    canOverrideTree: 0
+    canBePlacedOn: 0
     count: 0
   - type: 0
     description: 
@@ -13235,46 +13247,64 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 243ae876f400f2c42a3ba557e0a451ef, type: 2}
     - {fileID: 11400000, guid: fd076919d896a0e458ac9a145833807b, type: 2}
     - {fileID: 0}
+    canOverrideTree: 0
+    canBePlacedOn: 0
     count: 0
   - type: 0
     description: 
     icon: {fileID: 0}
     tiles: []
+    canOverrideTree: 0
+    canBePlacedOn: 0
     count: 0
   - type: 0
     description: 
     icon: {fileID: 0}
     tiles: []
+    canOverrideTree: 0
+    canBePlacedOn: 0
     count: 0
   - type: 0
     description: 
     icon: {fileID: 0}
     tiles: []
+    canOverrideTree: 0
+    canBePlacedOn: 0
     count: 0
   - type: 0
     description: 
     icon: {fileID: 0}
     tiles: []
+    canOverrideTree: 0
+    canBePlacedOn: 0
     count: 0
   - type: 0
     description: 
     icon: {fileID: 0}
     tiles: []
+    canOverrideTree: 0
+    canBePlacedOn: 0
     count: 0
   - type: 0
     description: 
     icon: {fileID: 0}
     tiles: []
+    canOverrideTree: 0
+    canBePlacedOn: 0
     count: 0
   - type: 0
     description: 
     icon: {fileID: 0}
     tiles: []
+    canOverrideTree: 0
+    canBePlacedOn: 0
     count: 0
   - type: 0
     description: 
     icon: {fileID: 0}
     tiles: []
+    canOverrideTree: 0
+    canBePlacedOn: 0
     count: 0
   plots:
   - type: 17

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class InventoryManager : MonoBehaviour
@@ -26,13 +25,13 @@ public class InventoryManager : MonoBehaviour
             if (draggedPosition != -1)
             {
                 slots[draggedPosition].transform.GetChild(1).position = Input.mousePosition;
-                DisplaySelector(cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, selectorMap.transform.parent.position.z)));
+                DisplaySelector(cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, selectorMap.transform.parent.position.z)), items[draggedPosition]);
             }
         }
         else if(draggedPosition != -1)
         {
             HideSelector(selectorPos);
-            if (CanPlantAt(cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, treeMap.transform.parent.position.z))))
+            if (CanPlantAt(cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, treeMap.transform.parent.position.z)), items[draggedPosition]))
             {
                 PlaceTree(items[draggedPosition], cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, treeMap.transform.parent.position.z)));
                 items[draggedPosition].count -= 1;
@@ -46,12 +45,12 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    private bool CanPlantAt(Vector3 position)
+    private bool CanPlantAt(Vector3 position, TreeItem item)
     {
         Vector3Int pos = treeMap.WorldToCell(position);
         if (-8 <= pos.x && pos.x <= 11 && -15 <= pos.y && pos.y <= 4)
         {
-            if (GetPlotIndex(pos) != -1 && plots[GetPlotIndex(pos)].treePlaced == TreeType.Nothing && (plots[GetPlotIndex(pos)].type & PlotType.Normal) != 0)
+            if (GetPlotIndex(pos) != -1 && plots[GetPlotIndex(pos)].treePlaced == TreeType.Nothing && (plots[GetPlotIndex(pos)].type & item.canBePlacedOn) != 0)
             {
                 return true;
             }
@@ -80,15 +79,22 @@ public class InventoryManager : MonoBehaviour
                 i++;
             }
         }
-        
 
-        //switch (item.type)
-        //{
-        //    case TreeType.AppleTree:
-        //        break;
-        //    default:
-        //        break;
-        //}
+
+        switch (item.type)
+        {
+            case TreeType.AppleTree:
+                break;
+            default:
+                break;
+        }
+
+        CallPowers();
+    }
+
+    private void CallPowers()
+    {
+
     }
 
     public void StartDraggin(int index)
@@ -107,7 +113,7 @@ public class InventoryManager : MonoBehaviour
     //    }
     //}
 
-    private void DisplaySelector(Vector3 position)
+    private void DisplaySelector(Vector3 position, TreeItem item)
     {
         Vector3Int pos = selectorMap.WorldToCell(position);
         Vector2Int plotPos = GetPlotPosition(pos);
@@ -123,7 +129,7 @@ public class InventoryManager : MonoBehaviour
         if (plotPos.x == 999 || plotPos.y == 999)
             return;
 
-        bool canPlant = CanPlantAt(position);
+        bool canPlant = CanPlantAt(position, item);
         selectorPos = plotPos;
         int i = -1;
         for (int y = 0; y > -4; y--)
