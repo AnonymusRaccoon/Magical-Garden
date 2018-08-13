@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using TMPro;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -43,14 +44,7 @@ public class InventoryManager : MonoBehaviour
                 CompteurItem.text = items[draggedPosition].count.ToString();
                 if (items[draggedPosition].count < 1)
                 {
-                    if (items[draggedPosition].iconGris != null)
-                    {
-                        GetComponent<SpriteRenderer>().sprite = items[draggedPosition].iconGris;
-                    }
-                    else
-                    {
-                        Debug.LogErrorFormat("L'image en noire et blanc du slot" + draggedPosition + 1 + "n'a pas été assigné");
-                    }
+                    slots[draggedPosition].transform.GetChild(1).GetComponent<Image>().sprite = items[draggedPosition].iconGris;
                 }
             }
             else
