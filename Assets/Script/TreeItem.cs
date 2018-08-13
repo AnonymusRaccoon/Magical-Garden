@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 public class TreeItem
 {
     public TreeType type;
+    [TextArea(15, 20)]
     public string description;
     public Sprite icon;
     public Sprite iconGris;

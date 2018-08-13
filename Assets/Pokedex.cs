@@ -29,7 +29,6 @@ public class Pokedex : MonoBehaviour
     public void UpdateMissionText()
     {
         ArretDéfilement = true;
-        
         PokeText.text = GetComponent<Mission>().GetMissionText();
     }
 }
