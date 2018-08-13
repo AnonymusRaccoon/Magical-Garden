@@ -63,9 +63,17 @@ public class InventoryManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             ClearBoard();
-            //GetComponent<Mission>().GenerateMission();
             GetComponent<Mission>().WinUI.SetActive(false);
             GetComponent<Pokedex>().UpdateMissionText();
+            turnCount.text = "Turn: 01";
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            ClearBoard();
+            GetComponent<Mission>().GenerateMission();
+            GetComponent<Mission>().WinUI.SetActive(false);
+            GetComponent<Pokedex>().UpdateMissionText();
+            turnCount.text = "Turn: 01";
         }
     }
 
@@ -132,6 +140,18 @@ public class InventoryManager : MonoBehaviour
                 treeMap.SetTile(new Vector3Int(plotPos.x * 4 + x, plotPos.y * 4 + y, 0), item.tiles[i]);
                 i++;
             }
+        }
+    }
+
+    public void PlaceRandomTrees(int number)
+    {
+        for (int i = 0; i < number; i++)
+        {
+            int index = Random.Range(0, plots.Length);
+            if(plots[index].treePlaced == TreeType.Nothing)
+                index = Random.Range(0, plots.Length);
+
+            PlaceTree(items[Random.Range(0, items.Length)], index);
         }
     }
 
@@ -371,7 +391,8 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            slots[i].GetComponentInChildren<TextMeshProUGUI>().text = items[i].count.ToString().Length < 10 ? ("0" + items[i].count.ToString()) : items[i].count.ToString();
+            if(slots[i].GetComponentInChildren<TextMeshProUGUI>() != null)
+                slots[i].GetComponentInChildren<TextMeshProUGUI>().text = items[i].count.ToString().Length < 10 ? ("0" + items[i].count.ToString()) : items[i].count.ToString();
             if(items[i].count == 0)
                 slots[i].transform.GetChild(1).GetComponent<Image>().sprite = items[i].iconGris;
             else

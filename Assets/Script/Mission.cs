@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class Mission : MonoBehaviour {
 
-    TreeItem[] items;
-    public float difficulte;
+
+    public int easy;
+    public int hard;
+
+    [Space]
     public int minDrop;
-    public int itemDrop;
+    public int maxDrop;
+
+    [Space]
+    public int fewTree;
+    public int manyTree;
+
     public Dictionary<TreeType, int> Objectifs = new Dictionary<TreeType, int>();
+    TreeItem[] items;
     public GameObject WinUI; 
     public GameObject LooseUI; 
     private void Start()
@@ -19,7 +28,7 @@ public class Mission : MonoBehaviour {
             Debug.Log("eroor");
         }
 
-        if (difficulte> items.Length)
+        if (hard > items.Length)
         {
             Debug.LogError("difficulté trop grande");
         }
@@ -33,7 +42,8 @@ public class Mission : MonoBehaviour {
     public void GenerateMission()
     {
         Objectifs = new Dictionary<TreeType, int>();
-        for (int i = 0; i < difficulte; i++)
+        int loop = Random.Range(easy, hard);
+        for (int i = 0; i < loop; i++)
         {
             AddTree();
         }
@@ -43,7 +53,9 @@ public class Mission : MonoBehaviour {
             mission = mission + "Place: " + i.Value + " " + i.Key.ToString() +"\n";
         }
 
+        GetComponent<InventoryManager>().PlaceRandomTrees(Random.Range(fewTree, manyTree));
         GiveTrees();
+        GetComponent<Pokedex>().UpdateMissionText();
     }
 
     private void GiveTrees()
@@ -54,7 +66,7 @@ public class Mission : MonoBehaviour {
             if (manager.items[i].type == TreeType.Nothing)
                 continue;
 
-            manager.items[i].count = Random.Range(minDrop, itemDrop);
+            manager.items[i].count = Random.Range(minDrop, maxDrop);
 
             if (Objectifs.ContainsKey(manager.items[i].type))
             {
@@ -85,7 +97,7 @@ public class Mission : MonoBehaviour {
         {
             int i = Random.Range(0, trees.Length);
             TreeType type = trees[i].type;
-            int number = Random.Range(items[i].maxInstanceForWin / 2, items[i].maxInstanceForWin);
+            int number = Random.Range(items[i].maxInstanceForWin / 2 + 1, items[i].maxInstanceForWin);
             Objectifs.Add(type, number);
         }
     }
