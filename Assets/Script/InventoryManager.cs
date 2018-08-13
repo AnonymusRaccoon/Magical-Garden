@@ -82,11 +82,7 @@ public class InventoryManager : MonoBehaviour
 
     private bool CanPlantAt(int index, TreeItem item)
     {
-<<<<<<< HEAD
         if (index != -1 && (plots[index].treePlaced & item.canOverrideTree) != 0 && (plots[index].type & item.canBePlacedOn) != 0)
-=======
-        if (index != -1 && (plots[index].treePlaced == TreeType.Nothing || (plots[index].treePlaced & item.canOverrideTree) != 0) && (plots[index].type & item.canBePlacedOn) != 0)
->>>>>>> 855b7e67b4d5af910de877aa8c5a694e22fdf088
         {
             return true;
         }
@@ -157,7 +153,6 @@ public class InventoryManager : MonoBehaviour
             {
                 List<int> freePlots = new List<int>();
 
-<<<<<<< HEAD
                 if (CanPlantAt(i - 1, items[(int)TreeType.TribbleTree]))
                     freePlots.Add(i - 1);
                 if (CanPlantAt(i + 1, items[(int)TreeType.TribbleTree]))
@@ -169,16 +164,6 @@ public class InventoryManager : MonoBehaviour
                     freePlots.Add(i - 5);
                 if (CanPlantAt(i - 4, items[(int)TreeType.TribbleTree]))
                     freePlots.Add(i - 4);
-=======
-                if (i - 1 >= 0 && i % 5 != 0 && CanPlantAt(i - 1, items[(int)TreeType.TribbleTree - 1]))
-                    freePlots.Add(i - 1);
-                if (i + 1 <= 24 && i % 5 != 4 && CanPlantAt(i + 1, items[(int)TreeType.TribbleTree - 1]))
-                    freePlots.Add(i + 1);
-                if (i - 5 >= 0 && CanPlantAt(i - 5, items[(int)TreeType.TribbleTree - 1]))
-                    freePlots.Add(i - 5);
-                if (i + 5 <= 24 && CanPlantAt(i + 5, items[(int)TreeType.TribbleTree - 1]))
-                    freePlots.Add(i + 5);
->>>>>>> 855b7e67b4d5af910de877aa8c5a694e22fdf088
 
                 if (CanPlantAt(i + 6, items[(int)TreeType.TribbleTree]))
                     freePlots.Add(i + 6);
