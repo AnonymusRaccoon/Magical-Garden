@@ -322,6 +322,17 @@ public class InventoryManager : MonoBehaviour
         return true;
     }
 
+    public void ClearBoard()
+    {
+        for (int i = 0; i < 25; i++)
+        {
+            if(plots[i].treePlaced != TreeType.Nothing)
+                DeleteTreeAt(i);
+
+            plots[i].treePlaced = TreeType.Nothing;
+        }
+    }
+
     public void StartDraggin(int index)
     {
         if (items[index].count > 0)
