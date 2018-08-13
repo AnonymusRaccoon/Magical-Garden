@@ -81,10 +81,7 @@ public class InventoryManager : MonoBehaviour
 
     private bool CanPlantAt(int index, TreeItem item)
     {
-        print("Type: " +  item.type);
-        print("Tree Type: " + (plots[index].treePlaced == TreeType.Nothing));
-        print("Plot Type: " + ((plots[index].type & item.canBePlacedOn) != 0));
-        if (index != -1 && (plots[index].treePlaced == TreeType.Nothing || (plots[index].treePlaced & item.canOverrideTree) != 0) && (plots[index].type & item.canBePlacedOn) != 0)
+        if (index != -1 && (plots[index].treePlaced == TreeType.Nothing/* || (plots[index].treePlaced & item.canOverrideTree) != 0*/) && (plots[index].type & item.canBePlacedOn) != 0)
         {
             return true;
         }
@@ -98,6 +95,7 @@ public class InventoryManager : MonoBehaviour
     {
         Vector3Int cellPos = treeMap.WorldToCell(position);
         int index = GetPlotIndex(cellPos);
+        print(GetPlotPositionByIndex(index));
         Vector2Int plotPos = GetPlotPosition(cellPos);
         plots[index].treePlaced = item.type;
 
@@ -143,32 +141,37 @@ public class InventoryManager : MonoBehaviour
                 break;
         }
 
-        CallOtherPowers();
+        //CallOtherPowers();
     }
 
     private async void CallOtherPowers()
     {
+        List<int> dontCallPlotPower = new List<int>();
         await Task.Delay(1000);
         for (int i = 0; i < 25; i++)
         {
+            if (dontCallPlotPower.Contains(i))
+                continue;
+
             if (plots[i].treePlaced == TreeType.TribbleTree)
             {
                 List<int> freePlots = new List<int>();
 
-                if (i - 1 >= 0 && i % 5 != 0 && CanPlantAt(i - 1, items[(int)TreeType.TribbleTree]))
+                if (i - 1 >= 0 && i % 5 != 0 && CanPlantAt(i - 1, items[(int)TreeType.TribbleTree - 1]))
                     freePlots.Add(i - 1);
-                if (i + 1 <= 24 && i % 5 != 4 && CanPlantAt(i + 1, items[(int)TreeType.TribbleTree]))
+                if (i + 1 <= 24 && i % 5 != 4 && CanPlantAt(i + 1, items[(int)TreeType.TribbleTree - 1]))
                     freePlots.Add(i + 1);
-                if (i - 5 >= 0 && CanPlantAt(i - 5, items[(int)TreeType.TribbleTree]))
+                if (i - 5 >= 0 && CanPlantAt(i - 5, items[(int)TreeType.TribbleTree - 1]))
                     freePlots.Add(i - 5);
-                if (i + 5 <= 24 && CanPlantAt(i + 5, items[(int)TreeType.TribbleTree]))
+                if (i + 5 <= 24 && CanPlantAt(i + 5, items[(int)TreeType.TribbleTree - 1]))
                     freePlots.Add(i + 5);
 
-                print(freePlots.Count);
 
                 if(freePlots.Count > 0)
                 {
-                    PlaceTree(items[(int)TreeType.ThirstyTree], Random.Range(0, freePlots.Count - 1));
+                    int r = Random.Range(0, freePlots.Count);
+                    dontCallPlotPower.Add(freePlots[r]);
+                    PlaceTree(items[(int)TreeType.TribbleTree - 1], freePlots[r]);
                     await Task.Delay(1000);
                 }
             }
@@ -249,8 +252,7 @@ public class InventoryManager : MonoBehaviour
 
     private Vector2Int GetPlotPositionByIndex(int index)
     {
-        print(new Vector2Int(index / 5, 5 - index % 5));
-        return new Vector2Int(index / 5, 5 - index % 5);
+        return new Vector2Int(index % 5 - 2, index / 5 - 3);
     }
 
     private Vector2Int GetPlotPosition(Vector3Int position)
