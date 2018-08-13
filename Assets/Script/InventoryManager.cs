@@ -48,7 +48,7 @@ public class InventoryManager : MonoBehaviour
                 items[draggedPosition].count -= 1;
                 slots[draggedPosition].transform.GetChild(1).position = defaultPos;
                 TextMeshProUGUI CompteurItem = slots[draggedPosition].GetComponentInChildren<TextMeshProUGUI>();
-                CompteurItem.text = items[draggedPosition].count.ToString().Length < 10 ? "0" + items[draggedPosition].count.ToString() : items[draggedPosition].count.ToString();
+                CompteurItem.text = items[draggedPosition].count.ToString().Length < 10 ? ("0" + items[draggedPosition].count.ToString()) : items[draggedPosition].count.ToString();
                 if (items[draggedPosition].count < 1)
                 {
                     slots[draggedPosition].transform.GetChild(1).GetComponent<Image>().sprite = items[draggedPosition].iconGris;
@@ -89,7 +89,7 @@ public class InventoryManager : MonoBehaviour
 
     private bool CanPlantAt(int index, TreeItem item)
     {
-        if (index != -1 && (plots[index].treePlaced == TreeType.Nothing/* || (plots[index].treePlaced & item.canOverrideTree) != 0*/) && (plots[index].type & item.canBePlacedOn) != 0)
+        if (index != -1 && plots[index].treePlaced == TreeType.Nothing && (plots[index].type & item.canBePlacedOn) != 0)
         {
             return true;
         }
@@ -314,6 +314,10 @@ public class InventoryManager : MonoBehaviour
         {
             GetComponent<Mission>().HasWon();
         }
+        else if (UserHasLoose())
+        {
+            GetComponent<Mission>().LooseUI.SetActive(true);
+        }
     }
 
     private bool UserHasWon()
@@ -327,6 +331,19 @@ public class InventoryManager : MonoBehaviour
                 return false;
         }
         return true;
+    }
+
+    private bool UserHasLoose()
+    {
+        int freePlots = 0;
+        foreach (Plot plot in plots)
+            if (plot.treePlaced == TreeType.Nothing)
+                freePlots++;
+
+        if (freePlots == 0)
+            return true;
+        else
+            return false;
     }
 
     public void ClearBoard()
@@ -354,7 +371,7 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            slots[i].GetComponentInChildren<TextMeshProUGUI>().text = items[i].count.ToString().Length < 10 ? "0" + items[i].count.ToString(): items[i].count.ToString();
+            slots[i].GetComponentInChildren<TextMeshProUGUI>().text = items[i].count.ToString().Length < 10 ? ("0" + items[i].count.ToString()) : items[i].count.ToString();
             if(items[i].count == 0)
                 slots[i].transform.GetChild(1).GetComponent<Image>().sprite = items[i].iconGris;
             else

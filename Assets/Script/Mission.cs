@@ -10,6 +10,7 @@ public class Mission : MonoBehaviour {
     public int itemDrop;
     public Dictionary<TreeType, int> Objectifs = new Dictionary<TreeType, int>();
     public GameObject WinUI; 
+    public GameObject LooseUI; 
     private void Start()
     {
         items = GetComponent<InventoryManager>().items;
@@ -31,6 +32,7 @@ public class Mission : MonoBehaviour {
 
     public void GenerateMission()
     {
+        Objectifs = new Dictionary<TreeType, int>();
         for (int i = 0; i < difficulte; i++)
         {
             AddTree();
