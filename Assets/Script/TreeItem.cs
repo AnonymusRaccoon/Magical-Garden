@@ -7,6 +7,7 @@ public class TreeItem
     public TreeType type;
     public string description;
     public Sprite icon;
+    public Sprite iconGris;
     public TileBase[] tiles = new TileBase[16];
     [EnumFlags] public TreeType canOverrideTree;
     [EnumFlags] public PlotType canBePlacedOn;
