@@ -7,39 +7,29 @@ using System.Threading.Tasks;
 public class Pokedex : MonoBehaviour
 {
     public TextMeshProUGUI PokeText;
-    public int PokeTemps = 10;
-    private bool PokeBool = false;
-    public bool ArretDéfilement = false;
-
+    public int PokeTemps = 5;
+    private bool ArretDéfilement = false;
+    private string PokeSubDescription;
 
     public async void PokeDescription(int PokeNumero)
     {
-        if (PokeBool == false)
+        ArretDéfilement = false;
+        PokeSubDescription = GetComponent<InventoryManager>().items[PokeNumero].description;
+        PokeText.text = null;
+        for (int i = 0; i < PokeSubDescription.Length; i++)
         {
-            string PokeSubDescription = GetComponent<InventoryManager>().items[PokeNumero].description;
-            PokeText.text = null;
-            PokeBool = true;
-            for (int i = 0; i < PokeSubDescription.Length; i++)
+            if (ArretDéfilement == true)
             {
-                if (ArretDéfilement == true)
-                {
-                    ArretDéfilement = false;
-                    PokeBool = false;
-                    return;
-                }
-                PokeText.text += PokeSubDescription[i];
-                await Task.Delay(PokeTemps);
-                
+                return;
             }
-            PokeBool = false;
+            PokeText.text += PokeSubDescription[i];
+            await Task.Delay(PokeTemps);
         }
-
     }
     public void UpdateMissionText()
     {
         ArretDéfilement = true;
         
         PokeText.text = GetComponent<Mission>().GetMissionText();
-        ArretDéfilement = false;
     }
 }

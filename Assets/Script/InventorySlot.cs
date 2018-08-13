@@ -3,19 +3,22 @@ using UnityEngine.EventSystems;
 
 public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    public static InventoryManager manager;
+
     public void OnPointerDown(PointerEventData eventData)
     {
-        GameObject.Find("GameManager").GetComponent<InventoryManager>().StartDraggin(int.Parse(transform.parent.name.Substring(6, 2)) - 1);
+        manager.StartDraggin(int.Parse(transform.parent.name.Substring(6, 2)) - 1);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-
-        GameObject.Find("GameManager").GetComponent<Pokedex>().PokeDescription(int.Parse(transform.parent.name.Substring(6, 2)) - 1);
+        if(manager.draggedPosition == -1)
+            GameObject.Find("GameManager").GetComponent<Pokedex>().PokeDescription(int.Parse(transform.parent.name.Substring(6, 2)) - 1);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        GameObject.Find("GameManager").GetComponent<Pokedex>().UpdateMissionText();
+        if (manager.draggedPosition == -1)
+            GameObject.Find("GameManager").GetComponent<Pokedex>().UpdateMissionText();
     }
 }
