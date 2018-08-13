@@ -246,6 +246,7 @@ public class InventoryManager : MonoBehaviour
 
     private Vector2Int GetPlotPositionByIndex(int index)
     {
+        print(new Vector2Int(index / 5, 5 - index % 5));
         return new Vector2Int(index / 5, 5 - index % 5);
     }
 
