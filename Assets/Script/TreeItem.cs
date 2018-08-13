@@ -20,9 +20,9 @@ public enum TreeType
     AppleTree,
     ChameleonTree,
     TribbleTree,
-    Lol,
+    Unamed0,
     SwapTree,
-    Nop,
+    Unamed1,
     ThirstyTree,
     Cactus,
 };

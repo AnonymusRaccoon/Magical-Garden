@@ -14,7 +14,7 @@ public class InventoryManager : MonoBehaviour
 
     [Space]
     public GameObject[] slots;
-    public TreeItem[] items = new TreeItem[12];
+    public TreeItem[] items = new TreeItem[15];
     public Plot[] plots = new Plot[25];
 
     private int draggedPosition = -1;

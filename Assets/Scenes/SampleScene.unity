@@ -9008,7 +9008,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -318.71, y: -147.2}
+  m_AnchoredPosition: {x: -321.4, y: -105.8}
   m_SizeDelta: {x: 343.8, y: 202.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1181635282 stripped
@@ -9340,7 +9340,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -318.71, y: -145}
+  m_AnchoredPosition: {x: -321.4, y: -103.600006}
   m_SizeDelta: {x: 404.5, y: 248.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1475634576
@@ -13232,6 +13232,7 @@ GameObject:
   - component: {fileID: 1724986184}
   - component: {fileID: 1724986183}
   - component: {fileID: 1724986185}
+  - component: {fileID: 1724986186}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -13613,6 +13614,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PokeText: {fileID: 1169353273}
   PokeTemps: 2
+  "ArretD\xE9filement": 0
+--- !u!114 &1724986186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1724986182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4b4a071451fb1c47af7fedbbf6a4179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  difficulte: 3
+  MinArbre: 1
+  MaxArbre: 4
 --- !u!1 &1774186325 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1472403156812664, guid: 89e9215b05511f648b3306ce05aae35f,
