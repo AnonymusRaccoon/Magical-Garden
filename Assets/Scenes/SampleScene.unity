@@ -6841,7 +6841,7 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 185619f28bb6b4e4099b789192032fc1,
+      objectReference: {fileID: 21300000, guid: 7467489d95ee4604690203dd25ef1061,
         type: 3}
     - target: {fileID: 114335858491737490, guid: 89e9215b05511f648b3306ce05aae35f,
         type: 2}
@@ -13776,7 +13776,7 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d9d9e490f6867684cbf769acf98cf35a,
+      objectReference: {fileID: 21300000, guid: bd94c803c8d0053459513209a51b6626,
         type: 3}
     - target: {fileID: 114335858491737490, guid: 89e9215b05511f648b3306ce05aae35f,
         type: 2}
@@ -13935,6 +13935,11 @@ Prefab:
         type: 2}
       propertyPath: m_PreserveAspect
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224943580182468242, guid: 89e9215b05511f648b3306ce05aae35f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -7.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89e9215b05511f648b3306ce05aae35f, type: 2}
