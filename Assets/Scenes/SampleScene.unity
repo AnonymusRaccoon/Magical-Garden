@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -14138,7 +14138,8 @@ MonoBehaviour:
     count: 0
     maxInstanceForWin: 6
   - type: 2
-    description: 
+    description: 'Round Abount: this tree move in a square pattern, also moving over
+      tree it''s in way'
     icon: {fileID: 21300000, guid: 7467489d95ee4604690203dd25ef1061, type: 3}
     iconGris: {fileID: 21300000, guid: 57371782065a2dc47937457212458fe9, type: 3}
     tiles:
@@ -14162,8 +14163,10 @@ MonoBehaviour:
     count: 0
     maxInstanceForWin: 0
   - type: 3
-    description: 'Tribble Tree: This tree got super fast metabolism witch allow it
-      to replicate himself very quicly'
+    description: 'Tribble Tree: This tree got a super fast metabolism witch allow
+      it to replicate himself very quicly
+
+      This tree can eat surrounding apple tree, leaving a stub'
     icon: {fileID: 21300000, guid: aedcd7fa2034175429245107bd2c7ff2, type: 3}
     iconGris: {fileID: 21300000, guid: 450c5f961034eb947be5cc6dff2c15fd, type: 3}
     tiles:
@@ -14261,8 +14264,10 @@ MonoBehaviour:
     count: 0
     maxInstanceForWin: 2
   - type: 7
-    description: Thirsty Tree:This dry tree desperately need water and can be only
-      planted near water \n Fuse with a cactus into a apple tree if they are neighbour
+    description: 'Thirsty Tree:This dry tree desperately need water and can be only
+      planted near water
+
+      Fuse with a cactus into a apple tree if they are neighbour'
     icon: {fileID: 21300000, guid: 435e6a6ec8a286642b6e3d806a4df4a2, type: 3}
     iconGris: {fileID: 21300000, guid: ef29ac5abb1733d4c8a523736c325205, type: 3}
     tiles:
@@ -14287,7 +14292,7 @@ MonoBehaviour:
     maxInstanceForWin: 6
   - type: 8
     description: 'Cactus: This plant can both be placed on dry tile and regular tile
-      \n  Fuse with a thirsty tree into a apple tree if they are neighbour'
+      Fuse with a thirsty tree into a apple tree if they are neighbour'
     icon: {fileID: 21300000, guid: 3db57d319be56e549bcab5adcebba956, type: 3}
     iconGris: {fileID: 21300000, guid: fce0d70ab60dddb4bba88e2e7854936e, type: 3}
     tiles:
