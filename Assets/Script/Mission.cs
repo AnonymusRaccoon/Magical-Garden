@@ -9,6 +9,8 @@ public class Mission : MonoBehaviour {
     string Missiontext = null;
     TreeItem[] items;
     public float difficulte;
+    public int minDrop;
+    public int itemDrop;
     public Dictionary<TreeType, int> Objectifs = new Dictionary<TreeType, int>();
     public int MinArbre = 1;
     public int MaxArbre = 10;
@@ -30,9 +32,8 @@ public class Mission : MonoBehaviour {
         }
        
     }
-    public void GenerateMission()
+    private void GenerateMission()
     {
-       
         for (int i = 0; i < difficulte; i++)
         {
             Objectifs.Add(ChoisirUnTypeDarbre(), Random.Range(MinArbre, MaxArbre)); 
@@ -41,6 +42,30 @@ public class Mission : MonoBehaviour {
         {
             Missiontext = Missiontext + "Place: " + i.Value + " " + i.Key.ToString() +"\n";
         }
+
+        GiveTrees();
+    }
+
+    private void GiveTrees()
+    {
+        InventoryManager manager = GetComponent<InventoryManager>();
+        for (int i = 0; i < manager.items.Length; i++)
+        {
+            if (manager.items[i].type == TreeType.Nothing)
+                continue;
+
+            manager.items[i].count = Random.Range(minDrop, itemDrop);
+
+            if (Objectifs.ContainsKey(manager.items[i].type))
+            {
+                int minCount;
+                Objectifs.TryGetValue(manager.items[i].type, out minCount);
+                if(manager.items[i].count < minCount)
+                    manager.items[i].count += minCount;
+                
+            }
+        }
+        manager.UpdateUI();
     }
 
     public string GetMissionText()
@@ -48,7 +73,7 @@ public class Mission : MonoBehaviour {
         return Missiontext;  
     }
 
-    public TreeType ChoisirUnTypeDarbre()
+    private TreeType ChoisirUnTypeDarbre()
     {
         TreeType arbre = items.Where(x => !Objectifs.ContainsKey(x.type) && x.type != TreeType.Nothing).ToArray()[Random.Range(0, items.Where(x => !Objectifs.ContainsKey(x.type) && x.type != TreeType.Nothing).ToArray().Length)].type;
         return arbre;

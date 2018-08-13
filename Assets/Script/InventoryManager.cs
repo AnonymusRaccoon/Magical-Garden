@@ -47,7 +47,7 @@ public class InventoryManager : MonoBehaviour
                 items[draggedPosition].count -= 1;
                 slots[draggedPosition].transform.GetChild(1).position = defaultPos;
                 TextMeshProUGUI CompteurItem = slots[draggedPosition].GetComponentInChildren<TextMeshProUGUI>();
-                CompteurItem.text = items[draggedPosition].count.ToString();
+                CompteurItem.text = items[draggedPosition].count.ToString().Length < 10 ? "0" + items[draggedPosition].count.ToString() : items[draggedPosition].count.ToString();
                 if (items[draggedPosition].count < 1)
                 {
                     slots[draggedPosition].transform.GetChild(1).GetComponent<Image>().sprite = items[draggedPosition].iconGris;
@@ -299,12 +299,24 @@ public class InventoryManager : MonoBehaviour
 
     public void StartDraggin(int index)
     {
-        //if(items[index].count > 0)
-        //{
+        if (items[index].count > 0)
+        {
             slots[index].transform.SetAsLastSibling();
             draggedPosition = index;
             defaultPos = slots[draggedPosition].transform.position;
-        //}
+        }
+    }
+
+    public void UpdateUI()
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            slots[i].GetComponentInChildren<TextMeshProUGUI>().text = items[i].count.ToString().Length < 10 ? "0" + items[i].count.ToString(): items[i].count.ToString();
+            if(items[i].count == 0)
+                slots[i].transform.GetChild(1).GetComponent<Image>().sprite = items[i].iconGris;
+            else
+                slots[i].transform.GetChild(1).GetComponent<Image>().sprite = items[i].icon;
+        }
     }
 
     //public void AddItem(TreeItem item)

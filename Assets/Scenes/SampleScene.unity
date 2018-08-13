@@ -13483,56 +13483,56 @@ MonoBehaviour:
     count: 0
   - type: 0
     description: 
-    icon: {fileID: 0}
-    iconGris: {fileID: 0}
+    icon: {fileID: 21300000, guid: 52d3d999fa1532f49a760c8bf33124ab, type: 3}
+    iconGris: {fileID: 21300000, guid: 52d3d999fa1532f49a760c8bf33124ab, type: 3}
     tiles: []
     canOverrideTree: 0
     canBePlacedOn: 0
     count: 0
   - type: 0
     description: 
-    icon: {fileID: 0}
-    iconGris: {fileID: 0}
+    icon: {fileID: 21300000, guid: 52d3d999fa1532f49a760c8bf33124ab, type: 3}
+    iconGris: {fileID: 21300000, guid: 52d3d999fa1532f49a760c8bf33124ab, type: 3}
     tiles: []
     canOverrideTree: 0
     canBePlacedOn: 0
     count: 0
   - type: 0
     description: 
-    icon: {fileID: 0}
-    iconGris: {fileID: 0}
+    icon: {fileID: 21300000, guid: 52d3d999fa1532f49a760c8bf33124ab, type: 3}
+    iconGris: {fileID: 21300000, guid: 52d3d999fa1532f49a760c8bf33124ab, type: 3}
     tiles: []
     canOverrideTree: 0
     canBePlacedOn: 0
     count: 0
   - type: 0
     description: 
-    icon: {fileID: 0}
-    iconGris: {fileID: 0}
+    icon: {fileID: 21300000, guid: 52d3d999fa1532f49a760c8bf33124ab, type: 3}
+    iconGris: {fileID: 21300000, guid: 52d3d999fa1532f49a760c8bf33124ab, type: 3}
     tiles: []
     canOverrideTree: 0
     canBePlacedOn: 0
     count: 0
   - type: 0
     description: 
-    icon: {fileID: 0}
-    iconGris: {fileID: 0}
+    icon: {fileID: 21300000, guid: 52d3d999fa1532f49a760c8bf33124ab, type: 3}
+    iconGris: {fileID: 21300000, guid: 52d3d999fa1532f49a760c8bf33124ab, type: 3}
     tiles: []
     canOverrideTree: 0
     canBePlacedOn: 0
     count: 0
   - type: 0
     description: 
-    icon: {fileID: 0}
-    iconGris: {fileID: 0}
+    icon: {fileID: 21300000, guid: 52d3d999fa1532f49a760c8bf33124ab, type: 3}
+    iconGris: {fileID: 21300000, guid: 52d3d999fa1532f49a760c8bf33124ab, type: 3}
     tiles: []
     canOverrideTree: 0
     canBePlacedOn: 0
     count: 0
   - type: 0
     description: 
-    icon: {fileID: 0}
-    iconGris: {fileID: 0}
+    icon: {fileID: 21300000, guid: 52d3d999fa1532f49a760c8bf33124ab, type: 3}
+    iconGris: {fileID: 21300000, guid: 52d3d999fa1532f49a760c8bf33124ab, type: 3}
     tiles: []
     canOverrideTree: 0
     canBePlacedOn: 0
@@ -13612,6 +13612,7 @@ MonoBehaviour:
     treePlaced: 0
   - type: 1
     treePlaced: 0
+  draggedPosition: -1
 --- !u!4 &1724986184
 Transform:
   m_ObjectHideFlags: 0
@@ -13638,7 +13639,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PokeText: {fileID: 1169353273}
   PokeTemps: 2
-  "ArretD\xE9filement": 0
 --- !u!114 &1724986186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13650,7 +13650,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b4a071451fb1c47af7fedbbf6a4179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulte: 3
+  difficulte: 10
+  minDrop: 1
+  itemDrop: 5
   MinArbre: 1
   MaxArbre: 4
 --- !u!1 &1774186325 stripped
