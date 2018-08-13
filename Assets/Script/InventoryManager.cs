@@ -38,6 +38,11 @@ public class InventoryManager : MonoBehaviour
                 PlaceTree(items[draggedPosition], cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, treeMap.transform.parent.position.z)));
                 items[draggedPosition].count -= 1;
                 slots[draggedPosition].transform.GetChild(1).position = defaultPos;
+
+                if(items[draggedPosition].count < 1)
+                {
+                    //Faut grisser
+                }
             }
             else
             {
@@ -52,7 +57,7 @@ public class InventoryManager : MonoBehaviour
         Vector3Int pos = treeMap.WorldToCell(position);
         if (-8 <= pos.x && pos.x <= 11 && -15 <= pos.y && pos.y <= 4)
         {
-            if (GetPlotIndex(pos) != -1 && plots[GetPlotIndex(pos)].treePlaced == TreeType.Nothing && (plots[GetPlotIndex(pos)].type & item.canBePlacedOn) != 0)
+            if (GetPlotIndex(pos) != -1 && (plots[GetPlotIndex(pos)].treePlaced & item.canOverrideTree) != 0 && (plots[GetPlotIndex(pos)].type & item.canBePlacedOn) != 0)
             {
                 return true;
             }
@@ -63,6 +68,18 @@ public class InventoryManager : MonoBehaviour
         }
         else
             return false;
+    }
+
+    private bool CanPlantAt(int index, TreeItem item)
+    {
+        if (index != -1 && (plots[index].treePlaced & item.canOverrideTree) != 0 && (plots[index].type & item.canBePlacedOn) != 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private void PlaceTree(TreeItem item, Vector3 position)
@@ -92,14 +109,64 @@ public class InventoryManager : MonoBehaviour
         CallOtherPowers();
     }
 
+    private void PlaceTree(TreeItem item, int index)
+    {
+        Vector2Int plotPos = GetPlotPositionByIndex(index);
+        plots[index].treePlaced = item.type;
+
+        int i = 0;
+        for (int y = 0; y > -4; y--)
+        {
+            for (int x = 0; x < 4; x++)
+            {
+                treeMap.SetTile(new Vector3Int(plotPos.x * 4 + x, plotPos.y * 4 + y, 0), item.tiles[i]);
+                i++;
+            }
+        }
+
+        //Spawn Power
+        switch (item.type)
+        {
+            default:
+                break;
+        }
+
+        CallOtherPowers();
+    }
+
     private async void CallOtherPowers()
     {
         await Task.Delay(1000);
-        foreach(Plot plot in plots)
+        for (int i = 0; i < 25; i++)
         {
-            if (plot.treePlaced == TreeType.TribbleTree)
+            if (plots[i].treePlaced == TreeType.TribbleTree)
             {
-                List<Plot> freePlots = new List<Plot>();
+                List<int> freePlots = new List<int>();
+
+                if (CanPlantAt(i - 1, items[(int)TreeType.TribbleTree]))
+                    freePlots.Add(i - 1);
+                if (CanPlantAt(i + 1, items[(int)TreeType.TribbleTree]))
+                    freePlots.Add(i + 1);
+
+                if (CanPlantAt(i - 6, items[(int)TreeType.TribbleTree]))
+                    freePlots.Add(i - 6);
+                if (CanPlantAt(i - 5, items[(int)TreeType.TribbleTree]))
+                    freePlots.Add(i - 5);
+                if (CanPlantAt(i - 4, items[(int)TreeType.TribbleTree]))
+                    freePlots.Add(i - 4);
+
+                if (CanPlantAt(i + 6, items[(int)TreeType.TribbleTree]))
+                    freePlots.Add(i + 6);
+                if (CanPlantAt(i + 5, items[(int)TreeType.TribbleTree]))
+                    freePlots.Add(i + 5);
+                if (CanPlantAt(i + 4, items[(int)TreeType.TribbleTree]))
+                    freePlots.Add(i + 4);
+
+                if(freePlots.Count > 0)
+                {
+                    PlaceTree(items[(int)TreeType.ThirstyTree], Random.Range(0, freePlots.Count - 1));
+                    await Task.Delay(1000);
+                }
             }
         }
     }
@@ -174,6 +241,11 @@ public class InventoryManager : MonoBehaviour
         plotPos.x += 2;
         plotPos.y += 3;
         return plotPos.x + plotPos.y * 5;
+    }
+
+    private Vector2Int GetPlotPositionByIndex(int index)
+    {
+        return new Vector2Int(index / 5, 5 - index % 5);
     }
 
     private Vector2Int GetPlotPosition(Vector3Int position)
