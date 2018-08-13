@@ -14136,7 +14136,7 @@ MonoBehaviour:
     - {fileID: 0}
     canBePlacedOn: 1
     count: 0
-    maxInstanceForWin: 8
+    maxInstanceForWin: 6
   - type: 2
     description: 
     icon: {fileID: 21300000, guid: 7467489d95ee4604690203dd25ef1061, type: 3}
@@ -14284,7 +14284,7 @@ MonoBehaviour:
     - {fileID: 0}
     canBePlacedOn: 16
     count: 0
-    maxInstanceForWin: 5
+    maxInstanceForWin: 6
   - type: 8
     description: 'Cactus: This tree canboth be placed on dry tile and regular tile'
     icon: {fileID: 21300000, guid: 3db57d319be56e549bcab5adcebba956, type: 3}
@@ -14308,7 +14308,7 @@ MonoBehaviour:
     - {fileID: 0}
     canBePlacedOn: 3
     count: 0
-    maxInstanceForWin: 8
+    maxInstanceForWin: 5
   - type: 0
     description: 
     icon: {fileID: 21300000, guid: 52d3d999fa1532f49a760c8bf33124ab, type: 3}
