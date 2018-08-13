@@ -45,8 +45,7 @@ public class InventoryManager : MonoBehaviour
                 {
                     if (items[draggedPosition].iconGris != null)
                     {
-                         slots[draggedPosition].GetComponent<SpriteRenderer>().sprite = items[draggedPosition].iconGris;
-                        Debug.Log("ici");
+                        GetComponent<SpriteRenderer>().sprite = items[draggedPosition].iconGris;
                     }
                     else
                     {
@@ -67,7 +66,7 @@ public class InventoryManager : MonoBehaviour
         Vector3Int pos = treeMap.WorldToCell(position);
         if (-8 <= pos.x && pos.x <= 11 && -15 <= pos.y && pos.y <= 4)
         {
-            if (GetPlotIndex(pos) != -1 && (plots[GetPlotIndex(pos)].treePlaced & item.canOverrideTree) != 0 && (plots[GetPlotIndex(pos)].type & item.canBePlacedOn) != 0)
+            if (GetPlotIndex(pos) != -1 && (plots[GetPlotIndex(pos)].treePlaced == TreeType.Nothing || (plots[GetPlotIndex(pos)].treePlaced & item.canOverrideTree) != 0) && (plots[GetPlotIndex(pos)].type & item.canBePlacedOn) != 0)
             {
                 return true;
             }
@@ -82,7 +81,10 @@ public class InventoryManager : MonoBehaviour
 
     private bool CanPlantAt(int index, TreeItem item)
     {
-        if (index != -1 && (plots[index].treePlaced & item.canOverrideTree) != 0 && (plots[index].type & item.canBePlacedOn) != 0)
+        print("Type: " +  item.type);
+        print("Tree Type: " + (plots[index].treePlaced == TreeType.Nothing));
+        print("Plot Type: " + ((plots[index].type & item.canBePlacedOn) != 0));
+        if (index != -1 && (plots[index].treePlaced == TreeType.Nothing || (plots[index].treePlaced & item.canOverrideTree) != 0) && (plots[index].type & item.canBePlacedOn) != 0)
         {
             return true;
         }
@@ -153,24 +155,16 @@ public class InventoryManager : MonoBehaviour
             {
                 List<int> freePlots = new List<int>();
 
-                if (CanPlantAt(i - 1, items[(int)TreeType.TribbleTree]))
+                if (i - 1 >= 0 && i % 5 != 0 && CanPlantAt(i - 1, items[(int)TreeType.TribbleTree]))
                     freePlots.Add(i - 1);
-                if (CanPlantAt(i + 1, items[(int)TreeType.TribbleTree]))
+                if (i + 1 <= 24 && i % 5 != 4 && CanPlantAt(i + 1, items[(int)TreeType.TribbleTree]))
                     freePlots.Add(i + 1);
-
-                if (CanPlantAt(i - 6, items[(int)TreeType.TribbleTree]))
-                    freePlots.Add(i - 6);
-                if (CanPlantAt(i - 5, items[(int)TreeType.TribbleTree]))
+                if (i - 5 >= 0 && CanPlantAt(i - 5, items[(int)TreeType.TribbleTree]))
                     freePlots.Add(i - 5);
-                if (CanPlantAt(i - 4, items[(int)TreeType.TribbleTree]))
-                    freePlots.Add(i - 4);
-
-                if (CanPlantAt(i + 6, items[(int)TreeType.TribbleTree]))
-                    freePlots.Add(i + 6);
-                if (CanPlantAt(i + 5, items[(int)TreeType.TribbleTree]))
+                if (i + 5 <= 24 && CanPlantAt(i + 5, items[(int)TreeType.TribbleTree]))
                     freePlots.Add(i + 5);
-                if (CanPlantAt(i + 4, items[(int)TreeType.TribbleTree]))
-                    freePlots.Add(i + 4);
+
+                print(freePlots.Count);
 
                 if(freePlots.Count > 0)
                 {
@@ -223,7 +217,7 @@ public class InventoryManager : MonoBehaviour
                 i++;
                 if ((i == 5 || i == 6 || i == 9 || i == 10) && canPlant)
                     continue;
-                treeMap.SetTile(new Vector3Int(plotPos.x * 4 + x, plotPos.y * 4 + y, 0), selector[i]);
+                selectorMap.SetTile(new Vector3Int(plotPos.x * 4 + x, plotPos.y * 4 + y, 0), selector[i]);
             }
         }
     }
@@ -235,7 +229,7 @@ public class InventoryManager : MonoBehaviour
         {
             for (int x = 0; x < 4; x++)
             {
-                treeMap.SetTile(new Vector3Int(pos.x * 4 + x, pos.y * 4 + y, 0), null);
+                selectorMap.SetTile(new Vector3Int(pos.x * 4 + x, pos.y * 4 + y, 0), null);
                 i++;
             }
         }
