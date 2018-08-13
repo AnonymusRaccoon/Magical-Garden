@@ -89,7 +89,6 @@ public class InventoryManager : MonoBehaviour
     {
         Vector3Int cellPos = treeMap.WorldToCell(position);
         int index = GetPlotIndex(cellPos);
-        print(GetPlotPositionByIndex(index));
         Vector2Int plotPos = GetPlotPosition(cellPos);
         plots[index].treePlaced = item.type;
 
@@ -103,7 +102,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        CallOtherPowers();
+        CallPowers(index);
     }
 
     private void PlaceTree(TreeItem item, int index)
@@ -120,8 +119,6 @@ public class InventoryManager : MonoBehaviour
                 i++;
             }
         }
-
-        //CallOtherPowers();
     }
 
     private void DeleteTreeAt(int index)
@@ -140,12 +137,52 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    private async void CallOtherPowers()
+    private async void CallPowers(int spawnIndex)
     {
         List<int> dontCallPlotPower = new List<int>();
+
+        //Spawn Power;
+        if (plots[spawnIndex].treePlaced == TreeType.SwapTree)
+        {
+            List<int> plot = new List<int>();
+
+            if (spawnIndex - 1 >= 0 && spawnIndex % 5 != 0 && plots[spawnIndex - 1].treePlaced != TreeType.Nothing)
+                plot.Add(spawnIndex - 1);
+            if (spawnIndex + 1 <= 24 && spawnIndex % 5 != 4 && plots[spawnIndex + 1].treePlaced != TreeType.Nothing)
+                plot.Add(spawnIndex + 1);
+            if (spawnIndex - 5 >= 0 && plots[spawnIndex - 5].treePlaced != TreeType.Nothing)
+                plot.Add(spawnIndex - 5);
+            if (spawnIndex + 5 <= 24 && plots[spawnIndex + 5].treePlaced != TreeType.Nothing)
+                plot.Add(spawnIndex + 5);
+
+            if (plot.Count > 0)
+            {
+                await Task.Delay(1000);
+                int r = Random.Range(0, plot.Count);
+                dontCallPlotPower.Add(plot[r]);
+                PlaceTree(items[(int)plots[plot[r]].treePlaced - 1], spawnIndex);
+                PlaceTree(items[(int)TreeType.SwapTree - 1], plot[r]);
+            }
+        }
+
+        //Check for other powers
+        List<int> callPowers = new List<int>();
+        int p = -1;
         await Task.Delay(1000);
         for (int i = 0; i < 25; i++)
         {
+            if (callPowers.Count > 0)
+            {
+                p = i - 1;
+                i = callPowers[0];
+                callPowers.RemoveAt(0);
+            }
+            else if(p != -1)
+            {
+                i = p;
+                p = -1;
+            }
+
             if (dontCallPlotPower.Contains(i))
                 continue;
 
@@ -189,7 +226,30 @@ public class InventoryManager : MonoBehaviour
                     int r = Random.Range(0, plot.Count);
                     dontCallPlotPower.Add(plot[r]);
                     DeleteTreeAt(i);
-                    PlaceTree(items[(int)TreeType.Cactus - 1], plot[r]);
+                    PlaceTree(items[(int)TreeType.AppleTree - 1], plot[r]);
+                    await Task.Delay(1000);
+                }
+            }
+            else if (plots[i].treePlaced == TreeType.SwapTree && ((i - 1 >= 0 && i % 5 != 0 && plots[i - 1].treePlaced == TreeType.AppleTree) || (i + 1 <= 24 && i % 5 != 4 && plots[i + 1].treePlaced == TreeType.AppleTree) || (i - 5 >= 0 && plots[i - 5].treePlaced == TreeType.AppleTree) || (i + 5 <= 24 && plots[i + 5].treePlaced == TreeType.AppleTree)))
+            {
+                List<int> plot = new List<int>();
+
+                if (i - 1 >= 0 && i % 5 != 0 && plots[i - 1].treePlaced != TreeType.Nothing)
+                    plot.Add(i - 1);
+                if (i + 1 <= 24 && i % 5 != 4 && plots[i + 1].treePlaced != TreeType.Nothing)
+                    plot.Add(i + 1);
+                if (i - 5 >= 0 && plots[i - 5].treePlaced != TreeType.Nothing)
+                    plot.Add(i - 5);
+                if (i + 5 <= 24 && plots[i + 5].treePlaced != TreeType.Nothing)
+                    plot.Add(i + 5);
+
+                if (plot.Count > 0)
+                {
+                    int r = Random.Range(0, plot.Count);
+                    dontCallPlotPower.Add(plot[r]);
+                    callPowers.Add(i);
+                    PlaceTree(items[(int)plots[plot[r]].treePlaced - 1], i);
+                    PlaceTree(items[(int)TreeType.SwapTree - 1], plot[r]);
                     await Task.Delay(1000);
                 }
             }
@@ -198,9 +258,12 @@ public class InventoryManager : MonoBehaviour
 
     public void StartDraggin(int index)
     {
-        slots[index].transform.SetAsLastSibling();
-        draggedPosition = index;
-        defaultPos = slots[draggedPosition].transform.position;
+        if(items[index].count > 0)
+        {
+            slots[index].transform.SetAsLastSibling();
+            draggedPosition = index;
+            defaultPos = slots[draggedPosition].transform.position;
+        }
     }
 
     //public void AddItem(TreeItem item)

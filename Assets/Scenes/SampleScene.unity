@@ -13357,7 +13357,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9cb1415fe0889b34b85613c01a46b855, type: 2}
     - {fileID: 11400000, guid: f9daa4e1889a5c94eb3bc185cb5f6fb3, type: 2}
     - {fileID: 0}
-    canOverrideTree: 2
+    canOverrideTree: 0
     canBePlacedOn: 3
     count: 0
   - type: 0
