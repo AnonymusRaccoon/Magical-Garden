@@ -17,12 +17,11 @@ public enum TreeType
 {
     Nothing,
     AppleTree,
-    JSP,
+    ChameleonTree,
     TribbleTree,
     Lol,
     SwapTree,
     Nop,
     ThirstyTree,
     Cactus,
-    ChameleonTree
 };
