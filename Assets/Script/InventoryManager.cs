@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -38,10 +39,18 @@ public class InventoryManager : MonoBehaviour
                 PlaceTree(items[draggedPosition], cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, treeMap.transform.parent.position.z)));
                 items[draggedPosition].count -= 1;
                 slots[draggedPosition].transform.GetChild(1).position = defaultPos;
-
-                if(items[draggedPosition].count < 1)
+                TextMeshProUGUI CompteurItem = slots[draggedPosition].GetComponentInChildren<TextMeshProUGUI>();
+                CompteurItem.text = items[draggedPosition].count.ToString();
+                if (items[draggedPosition].count < 1)
                 {
-                    //Faut grisser
+                    if (items[draggedPosition].iconGris != null)
+                    {
+                        GetComponent<SpriteRenderer>().sprite = items[draggedPosition].iconGris;
+                    }
+                    else
+                    {
+                        Debug.LogErrorFormat("L'image en noire et blanc du slot" + draggedPosition + 1 + "n'a pas été assigné");
+                    }
                 }
             }
             else
