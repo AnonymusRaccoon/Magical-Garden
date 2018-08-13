@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
 
 public class Mission : MonoBehaviour {
 
@@ -10,7 +11,7 @@ public class Mission : MonoBehaviour {
     public float difficulte;
     private Dictionary<string, int> Objectifs = new Dictionary<string, int>();
     public int MinArbre = 1;
-    public int MaxArbre = 4;
+    public int MaxArbre = 10;
     private void Start()
     {
         items = GetComponent<InventoryManager>().items;
@@ -19,7 +20,15 @@ public class Mission : MonoBehaviour {
             Debug.Log("eroor");
         }
          //Debug.Log(items[0].type);
-        GenerateMission();
+       if(difficulte> items.Length)
+        {
+            Debug.LogError("difficulté trop grande");
+        }
+        else
+        {
+            GenerateMission();
+        }
+       
     }
     public void GenerateMission()
     {
@@ -30,7 +39,7 @@ public class Mission : MonoBehaviour {
         }
         foreach (KeyValuePair<string,int> i in Objectifs)
         {
-            Missiontext = Missiontext + "Place" + i.Key + i.Value;
+            Missiontext = Missiontext + "Place: " + i.Value+ " " + i.Key +"\n";
         }
 
 
@@ -45,6 +54,15 @@ public class Mission : MonoBehaviour {
     }
     public string ChoisirUnTypeDarbre()
     {
-       return items[Random.Range(0, items.Length)].ToString();
+        string arbre = items.Where(x => !Objectifs.ContainsKey(x.type.ToString()) && x.type != TreeType.Nothing).ToArray()[Random.Range(0, items.Where(x => !Objectifs.ContainsKey(x.type.ToString()) && x.type != TreeType.Nothing).ToArray().Length)].type.ToString();
+        //if (Objectifs.ContainsKey(arbre))
+        //{
+        //    return ChoisirUnTypeDarbre();
+
+        //}
+        //else
+        //{
+            return arbre;
+        //}
     }
 }
