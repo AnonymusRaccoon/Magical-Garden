@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -14478,9 +14478,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b4a071451fb1c47af7fedbbf6a4179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulte: 5
+  easy: 4
+  hard: 8
   minDrop: 1
-  itemDrop: 5
+  maxDrop: 10
+  fewTree: 0
+  manyTree: 4
   WinUI: {fileID: 1264435080}
   LooseUI: {fileID: 1470635746}
 --- !u!1 &1774186325 stripped

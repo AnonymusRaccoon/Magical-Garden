@@ -145,13 +145,21 @@ public class InventoryManager : MonoBehaviour
 
     public void PlaceRandomTrees(int number)
     {
+        TreeItem[] trees = items.Where(x => x.type != TreeType.Nothing).ToArray();
         for (int i = 0; i < number; i++)
         {
+            TreeItem tree = trees[Random.Range(0, trees.Length)];
             int index = Random.Range(0, plots.Length);
-            if(plots[index].treePlaced == TreeType.Nothing)
-                index = Random.Range(0, plots.Length);
 
-            PlaceTree(items[Random.Range(0, items.Length)], index);
+            while(!CanPlantAt(index, tree))
+            {
+                print(index);
+                index++;
+                if (index > plots.Length)
+                    continue;
+            }
+
+            PlaceTree(tree, index);
         }
     }
 
