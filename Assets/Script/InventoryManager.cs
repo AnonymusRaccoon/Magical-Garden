@@ -23,6 +23,9 @@ public class InventoryManager : MonoBehaviour
     private Vector3 defaultPos;
     private Vector2Int selectorPos;
 
+    private Dictionary<int, TreeType> preSpawnedTree = new Dictionary<int, TreeType>();
+    private int[] savedItems = new int[15];
+
 
     private void Start()
     {
@@ -63,6 +66,8 @@ public class InventoryManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             ClearBoard();
+            PlacePreSpawnedTrees();
+            GiveItemsBack();
             GetComponent<Mission>().WinUI.SetActive(false);
             GetComponent<Pokedex>().UpdateMissionText();
             turnCount.text = "Turn: 01";
@@ -131,7 +136,6 @@ public class InventoryManager : MonoBehaviour
 
     private void PlaceTree(TreeItem item, int index)
     {
-        print("Index: "  + index);
         Vector2Int plotPos = GetPlotPositionByIndex(index);
         plots[index].treePlaced = item.type;
 
@@ -162,9 +166,20 @@ public class InventoryManager : MonoBehaviour
             }
 
             if (index != plots.Length)
+            {
                 PlaceTree(tree, index);
+                preSpawnedTree.Add(index, tree.type);
+            }
             else
                 i--;
+        }
+    }
+
+    private void PlacePreSpawnedTrees()
+    {
+        foreach (KeyValuePair<int, TreeType> item in preSpawnedTree)
+        {
+            PlaceTree(items[(int)item.Value - 1], item.Key);
         }
     }
 
@@ -517,6 +532,23 @@ public class InventoryManager : MonoBehaviour
             return true;
         else
             return false;
+    }
+
+    public void SaveUserItems()
+    {
+        for (int i = 0; i < 15; i++)
+        {
+            savedItems[i] = items[i].count;
+        }
+    }
+
+    private void GiveItemsBack()
+    {
+        for (int i = 0; i < 15; i++)
+        {
+            items[i].count = savedItems[i];
+        }
+        UpdateUI();
     }
 
     public void ClearBoard()

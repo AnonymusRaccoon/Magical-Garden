@@ -88,6 +88,7 @@ public class Mission : MonoBehaviour {
             }
         }
         manager.UpdateUI();
+        manager.SaveUserItems();
     }
 
     public string GetMissionText()
