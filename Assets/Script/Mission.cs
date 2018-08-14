@@ -20,7 +20,8 @@ public class Mission : MonoBehaviour {
     TreeItem[] items;
     public GameObject WinUI; 
     public GameObject LooseUI; 
-    private void Start()
+
+    public void Initiate()
     {
         items = GetComponent<InventoryManager>().items;
         if(items == null)
