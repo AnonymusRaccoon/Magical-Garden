@@ -7074,6 +7074,130 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1472403156812664, guid: 89e9215b05511f648b3306ce05aae35f,
     type: 2}
   m_PrefabInternal: {fileID: 667631603}
+--- !u!1 &508468659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 508468661}
+  - component: {fileID: 508468660}
+  m_Layer: 0
+  m_Name: SoundPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &508468660
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 508468659}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d51ef2f0a7a7c654c9fdda1a1548286a, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.2
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &508468661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 508468659}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 176.72403, y: -30.409298, z: -6.4269757}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &509480165
 Prefab:
   m_ObjectHideFlags: 0
@@ -14161,7 +14285,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: b37f3e5d6ce1f044dbdc9fa665c7041a, type: 2}
     canBePlacedOn: 2
     count: 0
-    maxInstanceForWin: 0
+    maxInstanceForWin: 3
   - type: 3
     description: 'Tribble Tree: This tree got a super fast metabolism witch allow
       it to replicate himself very quicly
@@ -14190,7 +14314,7 @@ MonoBehaviour:
     count: 0
     maxInstanceForWin: 10
   - type: 4
-    description: 'Star Platinuim tree: Push '
+    description: 'Star Platinuim tree: Push tree arround him.'
     icon: {fileID: 21300000, guid: bd94c803c8d0053459513209a51b6626, type: 3}
     iconGris: {fileID: 21300000, guid: 024f54f424e5378489e582232317a8f1, type: 3}
     tiles:
@@ -14210,9 +14334,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: e1695f67b739bf443b93716fadeb206e, type: 2}
     - {fileID: 11400000, guid: 55c50fef1803b224d9b32a7a3ed9fb86, type: 2}
     - {fileID: 0}
-    canBePlacedOn: 0
+    canBePlacedOn: 1
     count: 0
-    maxInstanceForWin: 0
+    maxInstanceForWin: 5
   - type: 5
     description: 'Swap Tree: This tree swap it''s position with it''s surrounding
       tree'
@@ -14483,7 +14607,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1724986185
 MonoBehaviour:

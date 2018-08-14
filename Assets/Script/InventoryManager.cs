@@ -448,7 +448,38 @@ public class InventoryManager : MonoBehaviour
                     callPowers.Add(i - 1);
                     callPowers.Add(i);
                 }
+            }
+            else if (plots[i].treePlaced == TreeType.StarPlatiniumTree)
+            {
+                bool pushed = false;
 
+                if (i - 2 >= 0 && i % 5 > 1 && plots[i - 1].treePlaced != TreeType.Nothing && plots[i - 2].treePlaced == TreeType.Nothing)
+                {
+                    pushed = true;
+                    PlaceTree(items[(int)plots[i - 1].treePlaced - 1], i - 2);
+                    DeleteTreeAt(i - 1);
+                }
+                if (i + 2 <= 24 && i % 5 < 3 && plots[i + 1].treePlaced != TreeType.Nothing && plots[i + 2].treePlaced == TreeType.Nothing)
+                {
+                    pushed = true;
+                    PlaceTree(items[(int)plots[i + 1].treePlaced - 1], i + 2);
+                    DeleteTreeAt(i + 1);
+                }
+                if (i - 10 >= 0 && plots[i - 5].treePlaced != TreeType.Nothing && plots[i - 10].treePlaced == TreeType.Nothing)
+                {
+                    pushed = true;
+                    PlaceTree(items[(int)plots[i - 5].treePlaced - 1], i - 10);
+                    DeleteTreeAt(i - 5);
+                }
+                if (i + 10 <= 24 && plots[i + 5].treePlaced != TreeType.Nothing && plots[i + 10].treePlaced == TreeType.Nothing)
+                {
+                    pushed = true;
+                    PlaceTree(items[(int)plots[i + 5].treePlaced - 1], i + 10);
+                    DeleteTreeAt(i + 5);
+                }
+
+                if (pushed)
+                    await Task.Delay(1000);
             }
         }
 

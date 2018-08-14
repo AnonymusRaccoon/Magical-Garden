@@ -21,7 +21,7 @@ public enum TreeType
     AppleTree,
     RoundabboutTree,
     TribbleTree,
-    Unamed1,
+    StarPlatiniumTree,
     SwapTree,
     GluttonTree,
     ThirstyTree,
