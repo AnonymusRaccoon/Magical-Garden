@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -693,7 +693,7 @@ GameObject:
   - component: {fileID: 295683772}
   - component: {fileID: 295683771}
   m_Layer: 5
-  m_Name: TextMeshPro Text
+  m_Name: ToolTips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -710,7 +710,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2138102597}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7420,7 +7420,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -9.1494, y: 3.5}
+  m_AnchoredPosition: {x: -9.149414, y: 3.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &457940428
@@ -10059,7 +10059,7 @@ RectTransform:
   - {fileID: 34534127}
   - {fileID: 1457582164}
   m_Father: {fileID: 2138102597}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -10578,7 +10578,7 @@ RectTransform:
   - {fileID: 1722986559}
   - {fileID: 1862955497}
   m_Father: {fileID: 2138102597}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -14759,6 +14759,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8078b45f9a3232446956ed5fdd47ddb8, type: 2}
   - {fileID: 11400000, guid: 372baa95be60a3c479f80c3e34781e9d, type: 2}
   turnCount: {fileID: 972967528}
+  StartUI: {fileID: 457940426}
   music: {fileID: 508468660}
   slots:
   - {fileID: 793124532}
@@ -16061,9 +16062,9 @@ RectTransform:
   - {fileID: 1475634575}
   - {fileID: 1169353275}
   - {fileID: 972967527}
+  - {fileID: 295683770}
   - {fileID: 1264435081}
   - {fileID: 1470635747}
-  - {fileID: 295683770}
   - {fileID: 457940427}
   m_Father: {fileID: 0}
   m_RootOrder: 2
