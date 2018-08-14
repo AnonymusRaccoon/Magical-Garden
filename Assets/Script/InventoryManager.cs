@@ -131,6 +131,7 @@ public class InventoryManager : MonoBehaviour
 
     private void PlaceTree(TreeItem item, int index)
     {
+        print("Index: "  + index);
         Vector2Int plotPos = GetPlotPositionByIndex(index);
         plots[index].treePlaced = item.type;
 
@@ -349,41 +350,103 @@ public class InventoryManager : MonoBehaviour
                         TreeType firstType = plots[i - 1].treePlaced;
                         TreeType secondType = plots[i + 4].treePlaced;
                         TreeType thirdType = plots[i + 5].treePlaced;
-                        PlaceTree(items[(int)TreeType.RoundabboutTree], i - 1);
-                        PlaceTree(items[(int)firstType], i + 4);
-                        PlaceTree(items[(int)secondType], i + 5);
-                        PlaceTree(items[(int)thirdType], i );
+
+                        plots[i - 1].startIndex = plots[i].startIndex;
+                        plots[i].startIndex = -1;
+                        PlaceTree(items[(int)TreeType.RoundabboutTree - 1], i - 1);
+                        if (firstType != TreeType.Nothing)
+                            PlaceTree(items[(int)firstType - 1], i + 4);
+                        else
+                            DeleteTreeAt(i + 4);
+                        if (secondType != TreeType.Nothing)
+                            PlaceTree(items[(int)secondType - 1], i + 5);
+                        else
+                            DeleteTreeAt(i + 5);
+                        if (thirdType != TreeType.Nothing)
+                            PlaceTree(items[(int)thirdType - 1], i);
+                        else
+                            DeleteTreeAt(i);
+
+                        callPowers.Add(i);
                     }
                 }
-                else if (plots[i].startIndex == i + 1)
+                else if (plots[i].startIndex - 1 == i)
                 {
                     TreeType firstType = plots[i + 5].treePlaced;
                     TreeType secondType = plots[i + 6].treePlaced;
                     TreeType thirdType = plots[i + 1].treePlaced;
-                    PlaceTree(items[(int)TreeType.RoundabboutTree], i + 5);
-                    PlaceTree(items[(int)firstType], i + 6);
-                    PlaceTree(items[(int)secondType], i + 1);
-                    PlaceTree(items[(int)thirdType], i);
+
+                    plots[i + 5].startIndex = plots[i].startIndex;
+                    plots[i].startIndex = -1;
+                    PlaceTree(items[(int)TreeType.RoundabboutTree - 1], i + 5);
+                    dontCallPlotPower.Add(i + 5);
+                    if (firstType != TreeType.Nothing)
+                        PlaceTree(items[(int)firstType - 1], i + 6);
+                    else
+                        DeleteTreeAt(i + 6);
+                    if (secondType != TreeType.Nothing)
+                        PlaceTree(items[(int)secondType - 1], i + 1);
+                    else
+                        DeleteTreeAt(i + 1);
+                    if (thirdType != TreeType.Nothing)
+                        PlaceTree(items[(int)thirdType - 1], i);
+                    else
+                        DeleteTreeAt(i);
+
+                    callPowers.Add(i);
                 }
-                else if (plots[i].startIndex == i + 4)
+                else if (plots[i].startIndex + 4 == i)
                 {
                     TreeType firstType = plots[i + 1].treePlaced;
                     TreeType secondType = plots[i - 4].treePlaced;
                     TreeType thirdType = plots[i - 5].treePlaced;
-                    PlaceTree(items[(int)TreeType.RoundabboutTree], i + 1);
-                    PlaceTree(items[(int)firstType], i - 4);
-                    PlaceTree(items[(int)secondType], i - 5);
-                    PlaceTree(items[(int)thirdType], i);
+
+                    plots[i + 1].startIndex = plots[i].startIndex;
+                    plots[i].startIndex = -1;
+                    PlaceTree(items[(int)TreeType.RoundabboutTree - 1], i + 1);
+                    dontCallPlotPower.Add(i + 1);
+                    if (firstType != TreeType.Nothing)
+                        PlaceTree(items[(int)firstType - 1], i - 4);
+                    else
+                        DeleteTreeAt(i - 4);
+                    if (secondType != TreeType.Nothing)
+                        PlaceTree(items[(int)secondType - 1], i - 5);
+                    else
+                        DeleteTreeAt(i - 5);
+                    if (thirdType != TreeType.Nothing)
+                        PlaceTree(items[(int)thirdType - 1], i);
+                    else
+                        DeleteTreeAt(i);
+
+                    callPowers.Add(i - 4);
+                    callPowers.Add(i - 5);
+                    callPowers.Add(i);
                 }
-                else if (plots[i].startIndex == i + 5)
+                else if (plots[i].startIndex + 5 == i)
                 {
                     TreeType firstType = plots[i - 5].treePlaced;
                     TreeType secondType = plots[i - 4].treePlaced;
                     TreeType thirdType = plots[i - 1].treePlaced;
-                    PlaceTree(items[(int)TreeType.RoundabboutTree], i - 5);
-                    PlaceTree(items[(int)firstType], i - 4);
-                    PlaceTree(items[(int)secondType], i - 1);
-                    PlaceTree(items[(int)thirdType], i);
+
+                    plots[i - 5].startIndex = plots[i].startIndex;
+                    plots[i].startIndex = -1;
+                    PlaceTree(items[(int)TreeType.RoundabboutTree - 1], i - 5);
+                    if (firstType != TreeType.Nothing)
+                        PlaceTree(items[(int)firstType - 1], i - 4);
+                    else
+                        DeleteTreeAt(i - 4);
+                    if (secondType != TreeType.Nothing)
+                        PlaceTree(items[(int)secondType - 1], i - 1);
+                    else
+                        DeleteTreeAt(i - 1);
+                    if (thirdType != TreeType.Nothing)
+                        PlaceTree(items[(int)thirdType - 1], i);
+                    else
+                        DeleteTreeAt(i);
+
+                    callPowers.Add(i - 4);
+                    callPowers.Add(i - 1);
+                    callPowers.Add(i);
                 }
 
             }

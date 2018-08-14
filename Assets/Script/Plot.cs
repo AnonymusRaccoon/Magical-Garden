@@ -5,7 +5,7 @@ public class Plot
     public PlotType type;
     public TreeType treePlaced;
 
-    public int startIndex;
+    public int startIndex = -1;
 }
 
 [System.Flags]
