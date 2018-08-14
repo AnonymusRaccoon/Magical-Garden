@@ -13,7 +13,9 @@ public class InventoryManager : MonoBehaviour
     public Tilemap selectorMap;
     public TileBase[] selector;
     public TextMeshProUGUI turnCount;
+    public GameObject StartUI;
     public AudioSource music;
+    private bool started = false;
 
     [Space]
     public GameObject[] slots;
@@ -63,6 +65,12 @@ public class InventoryManager : MonoBehaviour
                 slots[draggedPosition].transform.GetChild(1).position = defaultPos;
             }
             draggedPosition = -1;
+        }
+        if(!started && Input.anyKeyDown)
+        {
+            started = true;
+            StartUI.SetActive(false);
+            GetComponent<Mission>().Initiate();
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
