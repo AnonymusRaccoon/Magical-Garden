@@ -13,6 +13,7 @@ public class InventoryManager : MonoBehaviour
     public Tilemap selectorMap;
     public TileBase[] selector;
     public TextMeshProUGUI turnCount;
+    public AudioSource music;
 
     [Space]
     public GameObject[] slots;
@@ -79,6 +80,10 @@ public class InventoryManager : MonoBehaviour
             GetComponent<Mission>().WinUI.SetActive(false);
             GetComponent<Pokedex>().UpdateMissionText();
             turnCount.text = "Turn: 01";
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            music.mute = !music.mute;
         }
     }
 
@@ -153,6 +158,7 @@ public class InventoryManager : MonoBehaviour
     public void PlaceRandomTrees(int number)
     {
         TreeItem[] trees = items.Where(x => x.type != TreeType.Nothing).ToArray();
+        preSpawnedTree = new Dictionary<int, TreeType>();
         for (int i = 0; i < number; i++)
         {
             TreeItem tree = trees[Random.Range(0, trees.Length)];
